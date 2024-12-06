@@ -1,4 +1,5 @@
 ﻿using Microsoft.SemanticKernel;
+using Microsoft.SemanticKernel.ChatCompletion;
 using Microsoft.SemanticKernel.Plugins.Core;
 
 class Program
@@ -13,7 +14,8 @@ class Program
         //await PluginCall();
         //await PromptTemplateCall();
         //await CustomPromptCall();
-        await PersonaCall();
+        //await PersonaCall();
+        await SavePrompt();
     }
 
     static async Task SimpleCall()
@@ -152,6 +154,45 @@ I want to travel from March 11 to March 18.</message>
         var result = await kernel.InvokePromptAsync(prompt,
             new KernelArguments() { { "history", history },
                 { "language", language } });
+        Console.WriteLine(result);
+    }
+
+    static async Task SavePrompt()
+    {
+        var builder = Kernel.CreateBuilder();
+        builder.AddAzureOpenAIChatCompletion(
+            yourDeploymentName,
+            yourEndpoint,
+            yourKey,
+            "gpt-4-32k");
+
+        var kernel = builder.Build();
+
+#pragma warning disable SKEXP0050 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
+        kernel.ImportPluginFromType<ConversationSummaryPlugin>();
+#pragma warning restore SKEXP0050 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
+        var prompts = kernel.ImportPluginFromPromptDirectory("Prompts/TravelPlugins");
+
+        ChatHistory history = [];
+        string input = @"I'm planning an anniversary trip with my spouse. We like hiking, 
+    mountains, and beaches. Our travel budget is $15000";
+
+        var result = await kernel.InvokeAsync<string>(prompts["SuggestDestinations"],
+            new() { { "input", input } });
+
+        Console.WriteLine(result);
+        history.AddUserMessage(input);
+        history.AddAssistantMessage(result);
+
+        Console.WriteLine("Where would you like to go?");
+        input = Console.ReadLine();
+
+        result = await kernel.InvokeAsync<string>(prompts["SuggestActivities"],
+            new() {
+        { "history", history },
+        { "destination", input },
+            }
+        );
         Console.WriteLine(result);
     }
 }
