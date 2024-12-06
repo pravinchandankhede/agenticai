@@ -12,7 +12,8 @@ class Program
         //await SimpleCall();
         //await PluginCall();
         //await PromptTemplateCall();
-        await CustomPromptCall();
+        //await CustomPromptCall();
+        await PersonaCall();
     }
 
     static async Task SimpleCall()
@@ -113,6 +114,40 @@ class Program
     Group phrases by category. Include common direction 
     words. Display the phrases in the following format: 
     Hello - Ciao [chow]";
+
+        var result = await kernel.InvokePromptAsync(prompt,
+            new KernelArguments() { { "history", history },
+                { "language", language } });
+        Console.WriteLine(result);
+    }
+
+    static async Task PersonaCall()
+    {
+        var builder = Kernel.CreateBuilder();
+        builder.AddAzureOpenAIChatCompletion(
+            yourDeploymentName,
+            yourEndpoint,
+            yourKey,
+            "gpt-4-32k");
+
+        var kernel = builder.Build();
+
+        string language = "marathi";
+        string history = @"I'm traveling with my kids and one of them has a peanut allergy.";
+        string input = @"I have a vacation from June 1 to July 22. I want to go to Greece. 
+    I live in Chicago.";
+
+        // Assign a persona to the prompt
+        string prompt = @$"
+<message role=""system"">Instructions: Identify the from and to destinations 
+and dates from the user's request</message>
+
+<message role=""user"">Can you give me a list of flights from Seattle to Tokyo? 
+I want to travel from March 11 to March 18.</message>
+
+<message role=""assistant"">Seattle|Tokyo|03/11/2024|03/18/2024</message>
+
+<message role=""user"">${input}</message>";
 
         var result = await kernel.InvokePromptAsync(prompt,
             new KernelArguments() { { "history", history },
