@@ -1,4 +1,5 @@
-﻿using Microsoft.SemanticKernel;
+﻿using LearnDemo.Plugins;
+using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.ChatCompletion;
 using Microsoft.SemanticKernel.Plugins.Core;
 
@@ -7,7 +8,7 @@ class Program
     static string yourDeploymentName = "gpt-4-32k";
     static string yourEndpoint = "https://pctesopenaicentral.openai.azure.com/";
     static string yourKey = "0bf5d78b38a5487a9a999c9bea8e4f72";
-
+    
     public static async Task Main()
     {
         //await SimpleCall();
@@ -15,7 +16,8 @@ class Program
         //await PromptTemplateCall();
         //await CustomPromptCall();
         //await PersonaCall();
-        await SavePrompt();
+        //await SavePrompt();
+        await SkillCall();
     }
 
     static async Task SimpleCall()
@@ -193,6 +195,33 @@ I want to travel from March 11 to March 18.</message>
         { "destination", input },
             }
         );
+        Console.WriteLine(result);
+    }
+
+    static async Task SkillCall()
+    {
+        var builder = Kernel.CreateBuilder();
+        builder.AddAzureOpenAIChatCompletion(
+            yourDeploymentName,
+            yourEndpoint,
+            yourKey,
+            "gpt-4-32k");
+
+        var kernel = builder.Build();
+
+        kernel.ImportPluginFromType<MusicLibraryPlugin>();
+
+        var result = await kernel.InvokeAsync(
+            "MusicLibraryPlugin",
+            "AddToRecentlyPlayed",
+            new()
+            {
+                ["artist"] = "Tiara",
+                ["song"] = "Danse",
+                ["genre"] = "French pop, electropop, pop"
+            }
+        );
+
         Console.WriteLine(result);
     }
 }

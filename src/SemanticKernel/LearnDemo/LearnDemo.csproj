@@ -13,6 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="data\recentlyplayed.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Prompts\TravelPlugins\GetDestination\config.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
