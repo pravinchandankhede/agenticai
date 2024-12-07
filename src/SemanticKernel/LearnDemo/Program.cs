@@ -17,7 +17,8 @@ class Program
         //await CustomPromptCall();
         //await PersonaCall();
         //await SavePrompt();
-        await SkillCall();
+        //await SkillCall();
+        await CombinePluginAndFunctionCall();
     }
 
     static async Task SimpleCall()
@@ -222,6 +223,32 @@ I want to travel from March 11 to March 18.</message>
             }
         );
 
+        Console.WriteLine(result);
+    }
+
+    static async Task CombinePluginAndFunctionCall()
+    {
+        var builder = Kernel.CreateBuilder();
+        builder.AddAzureOpenAIChatCompletion(
+            yourDeploymentName,
+            yourEndpoint,
+            yourKey,
+            "gpt-4-32k");
+
+        var kernel = builder.Build();
+
+        kernel.ImportPluginFromType<MusicLibraryPlugin>();
+
+        string prompt = @"This is a list of music available to the user:
+                        {{MusicLibraryPlugin.GetMusicLibrary}} 
+
+                        This is a list of music the user has recently played:
+                        {{MusicLibraryPlugin.GetRecentPlays}}
+
+                        Based on their recently played music, suggest a song from
+                        the list to play next";
+
+        var result = await kernel.InvokePromptAsync(prompt);
         Console.WriteLine(result);
     }
 }
