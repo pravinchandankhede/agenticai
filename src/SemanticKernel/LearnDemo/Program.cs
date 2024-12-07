@@ -9,7 +9,7 @@ class Program
     static string yourDeploymentName = "gpt-4-32k";
     static string yourEndpoint = "https://pctesopenaicentral.openai.azure.com/";
     static string yourKey = "0bf5d78b38a5487a9a999c9bea8e4f72";    
-
+    
     public static async Task Main()
     {
         //await SimpleCall();
@@ -274,11 +274,26 @@ I want to travel from March 11 to March 18.</message>
             ToolCallBehavior = ToolCallBehavior.AutoInvokeKernelFunctions
         };
 
-        string prompt = @"I live in Paris. Based on my recently 
-                            played songs and a list of upcoming concerts, which concert 
-                            do you recommend?";
+        var songSuggesterFunction = kernel.CreateFunctionFromPrompt(
+            promptTemplate: @"Based on the user's recently played music:
+        {{$recentlyPlayedSongs}}
+        recommend a song to the user from the music library:
+        {{$musicLibrary}}",
+            functionName: "SuggestSong",
+            description: "Recommend a song from the library"
+        );
+
+        kernel.Plugins.AddFromFunctions("SuggestSong", [songSuggesterFunction]);
+
+        string prompt = @"Can you recommend a song from the music library?";
 
         var result = await kernel.InvokePromptAsync(prompt, new(settings));
+
+        Console.WriteLine(result);
+
+        prompt = @"Add this song to the recently played songs list:  title: 'Touch', artist: 'Cat's Eye', genre: 'Pop'";
+
+        result = await kernel.InvokePromptAsync(prompt, new(settings));
 
         Console.WriteLine(result);
     }
