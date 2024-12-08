@@ -7,8 +7,8 @@ using Microsoft.SemanticKernel.Plugins.Core;
 class Program
 {
     static string yourDeploymentName = "gpt-4-32k";
-    static string yourEndpoint = "https://pctesopenaicentral.openai.azure.com/";
-    static string yourKey = "0bf5d78b38a5487a9a999c9bea8e4f72";    
+    static string yourEndpoint = "[YOUR ENDPOINT]";
+    static string yourKey = "[YOUR KEY]]";    
     
     public static async Task Main()
     {
