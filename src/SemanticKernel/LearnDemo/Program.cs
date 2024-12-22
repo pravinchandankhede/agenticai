@@ -3,13 +3,16 @@ using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.ChatCompletion;
 using Microsoft.SemanticKernel.Connectors.OpenAI;
 using Microsoft.SemanticKernel.Plugins.Core;
+using Microsoft.Win32.SafeHandles;
+using ServiceSecrets;
 
 class Program
 {
-    static string yourDeploymentName = "gpt-4-32k";
-    static string yourEndpoint = "[YOUR ENDPOINT]";
-    static string yourKey = "[YOUR KEY]]";    
-    
+    static string yourDeploymentName = Secret.DeploymentName;
+    static string yourEndpoint = Secret.Endpoint;
+    //static string yourKey = "0bf5d78b38a5487a9a999c9bea8e4f72";    
+    static string yourKey = Secret.Key;
+
     public static async Task Main()
     {
         //await SimpleCall();

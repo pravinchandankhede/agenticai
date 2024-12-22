@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LearnDemo", "LearnDemo\Lear
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AITravelAgentStarter", "AITravelAgentStarter\AITravelAgentStarter.csproj", "{B74852E3-1581-4049-8732-64483A3642A7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceSecrets", "ServiceSecrets\ServiceSecrets.csproj", "{453BD544-4828-4C89-910F-A32996E7BD9B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{B74852E3-1581-4049-8732-64483A3642A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B74852E3-1581-4049-8732-64483A3642A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B74852E3-1581-4049-8732-64483A3642A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{453BD544-4828-4C89-910F-A32996E7BD9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{453BD544-4828-4C89-910F-A32996E7BD9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{453BD544-4828-4C89-910F-A32996E7BD9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{453BD544-4828-4C89-910F-A32996E7BD9B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

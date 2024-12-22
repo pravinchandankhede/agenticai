@@ -13,6 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ServiceSecrets\ServiceSecrets.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="data\concertdates.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
