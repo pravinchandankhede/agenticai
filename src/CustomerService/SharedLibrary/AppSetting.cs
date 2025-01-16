@@ -2,9 +2,9 @@
 
 public static class AppSetting
 {
-    public static string DeploymentName = "gpt-4-32k";
-    public static string Endpoint = "https://pctesopenaicentral.openai.azure.com/";
-    public static string Key = "0bf5d78b38a5487a9a999c9bea8e4f72";    
-    
+    public static string DeploymentName = "{YOUR DEPLOYMENT NAME HERE}";
+    public static string Endpoint = "{YOUR ENDPOINT HERE}";
+    public static string Key = "{YOUR KEY HERE}";
+
 
 }
