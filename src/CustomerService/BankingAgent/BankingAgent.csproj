@@ -21,10 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Plugins\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="Data\banking.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
