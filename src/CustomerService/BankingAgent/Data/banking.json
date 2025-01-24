@@ -1,0 +1,96 @@
+﻿{
+    "FastInvestmentsBankingManual": {
+        "Introduction": "Welcome to Fast Investments! This manual provides comprehensive information about our banking services, account types, interest rates, charges, and various processes to help you manage your banking needs efficiently. Our goal is to offer you a seamless banking experience with a wide range of services tailored to meet your financial needs.",
+        "Types Of Accounts": {
+            "Savings Account": {
+                "Description": "Our Savings Account is designed to help you save money while earning interest.",
+                "Features": {
+                    "MinimumBalanceRequirements": "Maintain a minimum balance of INR 5,000 to avoid penalties.",
+                    "InterestRates": "Earn interest at a rate of 3.5% per annum, credited quarterly.",
+                    "OnlineBankingAccess": "Manage your account online with ease, including fund transfers, bill payments, and more.",
+                    "ATMAccess": "Withdraw cash from any ATM nationwide without additional charges.",
+                    "PassbookAndStatements": "Receive a passbook for easy record-keeping and monthly e-statements."
+                }
+            },
+            "Current Account": {
+                "Description": "Our Current Account is ideal for businesses and individuals with high transaction needs.",
+                "Features": {
+                    "NoInterestOnBalances": "Current accounts do not earn interest.",
+                    "OverdraftFacilities": "Access to overdraft facilities to manage cash flow.",
+                    "UnlimitedTransactions": "Conduct unlimited transactions without any additional charges.",
+                    "ChequeBookFacility": "Issue cheques for payments and transactions.",
+                    "OnlineBanking": "Manage your account online with features like bulk payments, salary disbursements, and more."
+                }
+            },
+            "Overdraft Account": {
+                "Description": "An Overdraft Account allows you to withdraw more money than you have in your account, up to a pre-approved limit.",
+                "Features": {
+                    "InterestRatesOnOverdraftAmounts": "Interest is charged daily on the overdraft amount and debited monthly. Standard rate is 10% per annum.",
+                    "RepaymentTerms": "Flexible repayment terms based on your agreement with the bank.",
+                    "OverdraftLimits": "Limits are set based on your creditworthiness and account history."
+                }
+            }
+        },
+        "Interest Rates And Charges": {
+            "Savings Account Interest Rates": {
+                "Standard Savings Account": "3.5% per annum",
+                "Premium Savings Account": "4.0% per annum"
+            },
+            "OverdraftInterestRates": {
+                "StandardOverdraft": "10% per annum",
+                "PremiumOverdraft": "8% per annum"
+            },
+            "ServiceCharges": {
+                "AccountMaintenanceFees": "INR 100 per month for Savings Accounts with balances below the minimum requirement.",
+                "ATMWithdrawalFees": "No charges for withdrawals from Fast Investments ATMs; INR 20 per transaction at other ATMs after the first five transactions.",
+                "ChequeBookIssuanceFees": "INR 50 per cheque book of 25 leaves.",
+                "FundTransferFees": "No charges for NEFT and RTGS transactions conducted online."
+            }
+        },
+        "Nominee Process": {
+            "Steps": [
+                "Obtain the Nominee Form available at any branch or downloadable from our website.",
+                "Fill out the form with the nominee's full name, relationship to the account holder, and contact details.",
+                "Submit the form along with a copy of the nominee's ID proof at any branch.",
+                "Receive confirmation of the update within 7 working days."
+            ]
+        },
+        "MobileAndAddressChangeProcess": {
+            "Steps": [
+                "Log in to your online banking account.",
+                "Navigate to the 'Profile' section.",
+                "Update your mobile number or address and submit the changes.",
+                "You may receive a verification code on your new mobile number to confirm the change.",
+                "Receive confirmation of the update within 3 working days."
+            ]
+        },
+        "Customer Care Contact Information And Process": {
+            "Contact Information": {
+                "Phone": "1800-123-4567 (toll-free)",
+                "Email": "support@fastinvestments.com",
+                "OnlineChat": "Available on our website for instant support"
+            },
+            "Process": [
+                "Contact Customer Care through any of the above methods.",
+                "Provide your account details and query.",
+                "Receive assistance and a resolution or further instructions within 24 hours."
+            ]
+        },
+        "Escalation Process": {
+            "Steps": [
+                "Contact the Branch Manager at your local branch.",
+                "If unresolved, email the Grievance Redressal Officer at grievance@fastinvestments.com.",
+                "Receive a response within 7 working days. If further escalation is needed, you will be guided on the next steps."
+            ]
+        },
+        "Complaint Process": {
+            "Steps": [
+                "Obtain the Complaint Form available at any branch or downloadable from our website.",
+                "Fill out the form with details of your complaint, including any supporting documents.",
+                "Submit the form at any branch or email it to complaints@fastinvestments.com.",
+                "Receive an acknowledgment of your complaint within 3 working days, along with a resolution timeline.",
+                "Our team will investigate and resolve your complaint within the specified timeline. You will be kept informed of the progress."
+            ]
+        }
+    }
+}
