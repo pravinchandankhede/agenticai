@@ -33,6 +33,6 @@ internal class InMemory
 
         var record = dataUploader.GetDocumentRecord(prompt);
 
-        await dataUploader.GenerateEmbeddingsAndUpload("banking-documentation", [record]);
+        await dataUploader.GenerateEmbeddingsAndSave("banking-documentation", [record]);
     }
 }

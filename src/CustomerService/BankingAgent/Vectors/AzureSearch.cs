@@ -35,15 +35,15 @@ internal class AzureSearch
 
         Kernel kernel = kernelBuilder.Build();
 
-        var dataUploader = kernel.Services.GetRequiredService<EmbeddEngine>();
+        var embeddEngine = kernel.Services.GetRequiredService<EmbeddEngine>();
         var vectorStore = kernel.Services.GetRequiredService<IVectorStore>();
 
         var paragraphs = await GetParagraphs("Data\\Banking.json");
 
         foreach(KeyValuePair<String, String> paragraph in paragraphs)
         {            
-            var record = dataUploader.GetDocumentRecord(paragraph);
-            await dataUploader.GenerateEmbeddingsAndUpload("banking-documentation", new[] { record });
+            var record = embeddEngine.GetDocumentRecord(paragraph);
+            await embeddEngine.GenerateEmbeddingsAndSave("banking-documentation", new[] { record });
         }
     }
 

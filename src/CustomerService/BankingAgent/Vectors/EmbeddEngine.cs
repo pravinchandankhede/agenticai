@@ -13,25 +13,25 @@ using System.Threading.Tasks;
 internal class EmbeddEngine(IVectorStore vectorStore, ITextEmbeddingGenerationService textEmbeddingGenerationService)
 {
     /// <summary>
-    /// Generate an embedding for each text paragraph and upload it to the specified collection.
+    /// Generate an embedding for each text Record and upload it to the specified collection.
     /// </summary>
-    /// <param name="collectionName">The name of the collection to upload the text paragraphs to.</param>
-    /// <param name="textParagraphs">The text paragraphs to upload.</param>
+    /// <param name="collectionName">The name of the collection to upload the text Records to.</param>
+    /// <param name="documentRecords">The text Records to upload.</param>
     /// <returns>An async task.</returns>
-    public async Task GenerateEmbeddingsAndUpload(String collectionName, IEnumerable<DocumentRecord> textParagraphs)
+    public async Task GenerateEmbeddingsAndSave(String collectionName, IEnumerable<DocumentRecord> documentRecords)
     {
         var collection = vectorStore.GetCollection<String, DocumentRecord>(collectionName);
         await collection.CreateCollectionIfNotExistsAsync();
 
-        foreach (var paragraph in textParagraphs)
+        foreach (var record in documentRecords)
         {
             // Generate the text embedding.
-            Console.WriteLine($"Generating embedding for paragraph: {paragraph.ParagraphId}");
-            paragraph.TextEmbedding = await textEmbeddingGenerationService.GenerateEmbeddingAsync(paragraph.Text);
+            Console.WriteLine($"Generating embedding for record: {record.RecordId}");
+            record.TextEmbedding = await textEmbeddingGenerationService.GenerateEmbeddingAsync(record.Text);
 
-            // Upload the text paragraph.
-            Console.WriteLine($"Upserting paragraph: {paragraph.ParagraphId}");
-            await collection.UpsertAsync(paragraph);
+            // Upload the text Record.
+            Console.WriteLine($"Upserting record: {record.RecordId}");
+            await collection.UpsertAsync(record);
 
             Console.WriteLine();
         }
@@ -39,27 +39,29 @@ internal class EmbeddEngine(IVectorStore vectorStore, ITextEmbeddingGenerationSe
 
     public DocumentRecord GetDocumentRecord(String prompt)
     {
+        var key = Guid.NewGuid().ToString();
+
         return new DocumentRecord
         {
-            Key = Guid.NewGuid().ToString(),
-            DocumentUri = "https://www.microsoft.com",
-            ParagraphId = Guid.NewGuid().ToString(),
+            Key = key,
+            DocumentUri = $"https://www.fsinvest.com/{key}",
+            RecordId = Guid.NewGuid().ToString(),
             Text = prompt,
             Title = prompt.Substring(0, 25),
-            //TextEmbedding = readOnlyMemory
         };
     }
 
     public DocumentRecord GetDocumentRecord(KeyValuePair<String, String> entry)
     {
+        var key = Guid.NewGuid().ToString();
+
         return new DocumentRecord
         {
-            Key = Guid.NewGuid().ToString(),
-            DocumentUri = "https://www.microsoft.com",
-            ParagraphId = Guid.NewGuid().ToString(),
+            Key = key,
+            DocumentUri = $"https://www.fsinvest.com/{key}",
+            RecordId = Guid.NewGuid().ToString(),
             Text = entry.Value,
             Title = entry.Key,
-            //TextEmbedding = readOnlyMemory
         };
     }
 }

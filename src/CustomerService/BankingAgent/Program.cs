@@ -65,7 +65,9 @@ internal class Program
         };
         var history = new ChatHistory();
 
-        var systemMessage = @"you are banking assistant who help answer general banking queries for a 'fast investment' banking firm customers. You can also integrate with other systems to pull out details and provide answers and take actions";
+        var systemMessage = @"you are banking assistant who help answer general banking queries for a 'fast investment' banking firm customers. \
+                              You can also integrate with other systems to pull out details and provide answers and take actions";
+
         history.AddSystemMessage(systemMessage);
 
         String? input = String.Empty;
@@ -89,4 +91,3 @@ internal class Program
         } while (!String.IsNullOrEmpty(input));
     }
 }
-

@@ -1,12 +1,11 @@
 ﻿namespace BankingAgent;
 
-using Azure.Search.Documents.Indexes;
 using Microsoft.Extensions.VectorData;
 using System;
 
 internal class DocumentRecord
 {
-    /// <summary>A unique key for the text paragraph.</summary>
+    /// <summary>A unique key for the text Record.</summary>
     [VectorStoreRecordKey]
     public required String Key { get; init; }
 
@@ -18,11 +17,11 @@ internal class DocumentRecord
     [VectorStoreRecordData(IsFilterable =true, IsFullTextSearchable =true)]
     public required String Title { get; init; }
 
-    /// <summary>The id of the paragraph from the document containing the text.</summary>
+    /// <summary>The id of the Record from the document containing the text.</summary>
     [VectorStoreRecordData]
-    public required String ParagraphId { get; init; }
+    public required String RecordId { get; init; }
 
-    /// <summary>The text of the paragraph.</summary>
+    /// <summary>The text of the Record.</summary>
     [VectorStoreRecordData(IsFilterable = true, IsFullTextSearchable = true)]
     public required String Text { get; init; }
 
