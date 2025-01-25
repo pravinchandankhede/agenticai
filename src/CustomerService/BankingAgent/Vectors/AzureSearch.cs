@@ -10,44 +10,40 @@ using System.Text.Json;
 using System.Threading.Tasks;
 
 #pragma warning disable SKEXP0010
-#pragma warning disable SKEXP0001
-#pragma warning disable SKEXP0020
 
-internal class AzureSearch
+internal class AzureSearchEmbeddingProcessor
 {
-    public async Task Embedd()
+    public async Task GenerateEmbeddings()
     {
         // Using Kernel Builder.
-        var kernelBuilder = Kernel.CreateBuilder();
-        var jsonSerializerOptions = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower };
+        IKernelBuilder kernelBuilder = Kernel.CreateBuilder();
 
-        kernelBuilder.AddAzureOpenAITextEmbeddingGeneration(
+        _ = kernelBuilder.AddAzureOpenAITextEmbeddingGeneration(
                 deploymentName: AppSetting.EmbeddingModelDeploymentName!,
                 endpoint: AppSetting.Endpoint!,
                 apiKey: AppSetting.Key!);
 
-        kernelBuilder.AddAzureAISearchVectorStore(
+        _ = kernelBuilder.AddAzureAISearchVectorStore(
             new Uri(AppSetting.AzureSearchURL),
             new AzureKeyCredential(AppSetting.AzureSearchKey));
 
         // Register our embed engine.
-        kernelBuilder.Services.AddSingleton<EmbeddEngine>();
+        _ = kernelBuilder.Services.AddSingleton<EmbeddingEngine>();
 
-        Kernel kernel = kernelBuilder.Build();
+        var kernel = kernelBuilder.Build();
 
-        var embeddEngine = kernel.Services.GetRequiredService<EmbeddEngine>();
-        var vectorStore = kernel.Services.GetRequiredService<IVectorStore>();
+        var embeddingEngine = kernel.Services.GetRequiredService<EmbeddingEngine>();
 
-        var paragraphs = await GetParagraphs("Data\\Banking.json");
+        var documentRecords = await GetDocumentRecords("Data\\Banking.json");
 
-        foreach(KeyValuePair<String, String> paragraph in paragraphs)
-        {            
-            var record = embeddEngine.GetDocumentRecord(paragraph);
-            await embeddEngine.GenerateEmbeddingsAndSave("banking-documentation", new[] { record });
+        foreach (KeyValuePair<String, String> documentRecord in documentRecords)
+        {
+            var record = embeddingEngine.GetDocumentRecord(documentRecord);
+            await embeddingEngine.GenerateEmbeddingsAndStore("banking-documentation", [record]);
         }
     }
 
-    public async Task<Dictionary<String, String>> GetParagraphs(string filePath)
+    public async Task<Dictionary<String, String>> GetDocumentRecords(String filePath)
     {
         using FileStream openStream = File.OpenRead(filePath);
         var document = await JsonDocument.ParseAsync(openStream);
@@ -55,32 +51,39 @@ internal class AzureSearch
 
         if (root.TryGetProperty("FastInvestmentsBankingManual", out JsonElement manual))
         {
-            var level2Nodes = new Dictionary<String, String>();
-            foreach (var property in manual.EnumerateObject())
+            Dictionary<String, String> level2Nodes = [];
+
+            foreach (JsonProperty property in manual.EnumerateObject())
             {
-                var level2Text = new List<String> { property.Name };
+                List<String> level2Text = [property.Name];
                 AppendChildNodes(property.Value, level2Text);
                 level2Nodes.Add(property.Name, String.Join(" ", level2Text));
             }
+
             return level2Nodes;
         }
 
-        return new Dictionary<String, String>();
+        return [];
     }
 
-    private void AppendChildNodes(JsonElement element, List<string> textList)
+    /// <summary>
+    /// Utility Method. Recursively append child nodes to the text list.
+    /// </summary>
+    /// <param name="element">the current json node.</param>
+    /// <param name="textList">the list of literal from earlier node.</param>
+    private void AppendChildNodes(JsonElement element, List<String> textList)
     {
         switch (element.ValueKind)
         {
             case JsonValueKind.Object:
-                foreach (var property in element.EnumerateObject())
+                foreach (JsonProperty property in element.EnumerateObject())
                 {
                     textList.Add(property.Name);
                     AppendChildNodes(property.Value, textList);
                 }
                 break;
             case JsonValueKind.Array:
-                foreach (var item in element.EnumerateArray())
+                foreach (JsonElement item in element.EnumerateArray())
                 {
                     AppendChildNodes(item, textList);
                 }

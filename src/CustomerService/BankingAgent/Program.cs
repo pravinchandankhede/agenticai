@@ -9,6 +9,7 @@ using BankingAgent.Services;
 using Azure;
 using SharedLibrary;
 using Azure.Search.Documents.Indexes;
+using BankingAgent.Vectors;
 
 #pragma warning disable SKEXP0010
 #pragma warning disable SKEXP0001
@@ -20,7 +21,7 @@ internal class Program
 
     static async Task Main()
     {
-        //await new AzureSearch().Embedd();
+        //await new AzureSearchEmbeddingProcessor().GenerateEmbeddings();
 
         BankingServiceSeeder.Seed(BankingService);
 
