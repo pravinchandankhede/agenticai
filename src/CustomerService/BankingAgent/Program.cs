@@ -57,7 +57,7 @@ internal class Program
         var logger = kernel.GetRequiredService<ILogger<Program>>();
 
         kernel.ImportPluginFromType<AccountPlugIn>();
-        //kernel.ImportPluginFromType<SearchPlugin>();
+        kernel.ImportPluginFromType<SearchPlugin>();
         
         var chatCompletionSevice = kernel.GetRequiredService<IChatCompletionService>();
         var promptExecutionSettings = new PromptExecutionSettings()

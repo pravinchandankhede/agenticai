@@ -50,6 +50,7 @@ internal static class BankingServiceSeeder
     public static void Seed(BankingService bankingService)
     {
         var names = new[] { "John Doe", "Jane Smith", "Alice Johnson", "Bob Brown", "Charlie Davis", "Diana Evans", "Frank Green", "Grace Harris", "Henry Jackson", "Ivy King" };
+        var type = new[] { "debit", "credit" };
         var accountTypes = new[] { "Checking", "Savings", "Business" };
 
         for (int i = 0; i < 10; i++)
@@ -70,7 +71,8 @@ internal static class BankingServiceSeeder
                 {
                     Date = DateTime.Now.AddDays(-random.Next(30)),
                     Amount = Math.Round((decimal)(random.NextDouble() * 1000), 2),
-                    Description = $"Transaction {j + 1} for {account.Name}"
+                    Description = $"Transaction {j + 1} for {account.Name}",
+                    Type = type[random.Next(type.Length)]
                 };
                 account.Transactions.Add(transaction);
             }
@@ -96,4 +98,5 @@ internal class Transaction
     public DateTime Date { get; set; }
     public decimal Amount { get; set; }
     public String Description { get; set; }
+    public String Type { get; set; }
 }
