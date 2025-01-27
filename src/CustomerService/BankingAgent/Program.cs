@@ -9,7 +9,7 @@ using BankingAgent.Services;
 using Azure;
 using SharedLibrary;
 using Azure.Search.Documents.Indexes;
-using BankingAgent.Vectors;
+using System.Text.Json;
 
 #pragma warning disable SKEXP0010
 #pragma warning disable SKEXP0001
@@ -26,7 +26,7 @@ internal class Program
         BankingServiceSeeder.Seed(BankingService);
 
         var builder = Kernel.CreateBuilder();
-
+        
         builder.AddAzureOpenAIChatCompletion(
             SharedLibrary.AppSetting.DeploymentName,
             SharedLibrary.AppSetting.Endpoint,
@@ -49,7 +49,7 @@ internal class Program
         builder.Services.AddLogging(loggingBuilder =>
         {
             loggingBuilder.AddConsole();
-            loggingBuilder.SetMinimumLevel(LogLevel.Debug);
+            loggingBuilder.SetMinimumLevel(LogLevel.Trace);
         });
 
         var kernel = builder.Build();
@@ -58,11 +58,11 @@ internal class Program
 
         kernel.ImportPluginFromType<AccountPlugIn>();
         kernel.ImportPluginFromType<SearchPlugin>();
-        
+
         var chatCompletionSevice = kernel.GetRequiredService<IChatCompletionService>();
         var promptExecutionSettings = new PromptExecutionSettings()
         {
-            FunctionChoiceBehavior = FunctionChoiceBehavior.Auto()
+            FunctionChoiceBehavior = FunctionChoiceBehavior.Auto()            
         };
         var history = new ChatHistory();
 
@@ -88,7 +88,17 @@ internal class Program
                 logger.LogInformation("Response: {response}", response.InnerContent);
 
                 Console.WriteLine(response);
+
+                PrintChatHistory(history);
             }
         } while (!String.IsNullOrEmpty(input));
+    }
+
+    //Print the ChatHistory object in a JSON format
+    private static void PrintChatHistory(ChatHistory chatHistory)
+    {
+        Console.ForegroundColor = ConsoleColor.Green;
+        File.WriteAllText("log.json", JsonSerializer.Serialize(chatHistory, new JsonSerializerOptions { WriteIndented = true }));
+        Console.ResetColor();
     }
 }

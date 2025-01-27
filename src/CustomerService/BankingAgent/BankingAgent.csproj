@@ -14,6 +14,7 @@
     <PackageReference Include="Microsoft.SemanticKernel" Version="1.33.0" />
     <PackageReference Include="Microsoft.SemanticKernel.Connectors.AzureAISearch" Version="1.34.0-preview" />
     <PackageReference Include="Microsoft.SemanticKernel.Connectors.InMemory" Version="1.33.0-preview" />
+    <PackageReference Include="OpenTelemetry.Exporter.Console" Version="1.11.1" />
   </ItemGroup>
 
   <ItemGroup>

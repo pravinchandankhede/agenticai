@@ -17,27 +17,25 @@ using System.Threading.Tasks;
 
 internal class SearchPlugin(ITextEmbeddingGenerationService _textEmbeddingGenerationService, SearchIndexClient _indexClient)
 {
-    //public void AzureAISearchPlugin(ITextEmbeddingGenerationService textEmbeddingGenerationService, SearchIndexClient indexClient)
-    //{
-    //    _textEmbeddingGenerationService = textEmbeddingGenerationService;
-    //    _indexClient = indexClient;
-    //}
-
     [KernelFunction("Search")]
-    [Description("Search for a document similar to the given query.")]
-    public async Task<string> SearchAsync(string query)
+    [Description("Search for a text similar to the given query.")]
+    public async Task<String> SearchAsync(String query)
     {
-        // Convert string query to vector
-        ReadOnlyMemory<float> embedding = await _textEmbeddingGenerationService.GenerateEmbeddingAsync(query);
+        // Convert String query to vector
+        var embedding = await _textEmbeddingGenerationService.GenerateEmbeddingAsync(query);
 
         // Get client for search operations
-        SearchClient searchClient = _indexClient.GetSearchClient("banking-documentation");
+        var searchClient = _indexClient.GetSearchClient("banking-documentation");
 
         // Configure request parameters
         VectorizedQuery vectorQuery = new(embedding);
         vectorQuery.Fields.Add("TextEmbedding");
 
-        SearchOptions searchOptions = new() { VectorSearch = new() { Queries = { vectorQuery } } };
+        SearchOptions searchOptions = new()
+        {
+            VectorSearch = new() { Queries = { vectorQuery } },
+            //SemanticSearch = new SemanticSearchOptions() { SemanticQuery = query }
+        };
 
         // Perform search request
         Response<SearchResults<IndexSchema>> response = await searchClient.SearchAsync<IndexSchema>(searchOptions);
@@ -48,16 +46,13 @@ internal class SearchPlugin(ITextEmbeddingGenerationService _textEmbeddingGenera
             return result.Document.Chunk; // Return text from first result
         }
 
-        return string.Empty;
+        return String.Empty;
     }
 
     private sealed class IndexSchema
     {
         [JsonPropertyName("Text")]
-        public string Chunk { get; set; }
-
-        //[JsonPropertyName("chunk")]
-        //public string Chunk { get; set; }
+        public String Chunk { get; set; }
 
         [JsonPropertyName("TextEmbedding")]
         public ReadOnlyMemory<float> Vector { get; set; }

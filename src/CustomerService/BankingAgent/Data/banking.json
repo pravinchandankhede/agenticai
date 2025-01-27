@@ -64,17 +64,32 @@
                 "Receive confirmation of the update within 3 working days."
             ]
         },
-        "Customer Care Contact Information And Process": {
-            "Contact Information": {
-                "Phone": "1800-123-4567 (toll-free)",
-                "Email": "support@fastinvestments.com",
-                "OnlineChat": "Available on our website for instant support"
-            },
-            "Process": [
-                "Contact Customer Care through any of the above methods.",
-                "Provide your account details and query.",
-                "Receive assistance and a resolution or further instructions within 24 hours."
-            ]
+        "Contact Information": {
+            "Phone": "1800-123-4567 (toll-free)",
+            "Email": "support@fastinvestments.com",
+            "OnlineChat": "Available on our website for instant support",
+            "MailingAddress": "Fast Investments, Customer Care, 123 Finance Street, Mumbai, India",
+            "SocialMedia": {
+                "Twitter": "@FastInvestments",
+                "Facebook": "facebook.com/FastInvestments",
+                "LinkedIn": "linkedin.com/company/fast-investments"
+            }
+        },
+        "Complaint Process": [
+            "Contact Customer Care through any of the above contact methods.",
+            "Provide your account details, query, and any relevant information or documents.",
+            "Receive an acknowledgment of your query within 24 hours.",
+            "Our Customer Care team will investigate your query and provide a resolution or further instructions within 3 working days.",
+            "If your query requires further escalation, you will be informed of the next steps and expected resolution timeline."
+        ],
+        "Service Hours": {
+            "PhoneSupport": "Available 24/7",
+            "EmailSupport": "Responses within 24 hours, Monday to Friday",
+            "OnlineChat": "Available 9 AM to 9 PM IST, Monday to Saturday"
+        },
+        "Additional Support": {
+            "FAQ": "Visit our FAQ section on the website for quick answers to common questions.",
+            "HelpCenter": "Access our Help Center online for detailed guides and support articles."
         },
         "Escalation Process": {
             "Steps": [
@@ -83,14 +98,24 @@
                 "Receive a response within 7 working days. If further escalation is needed, you will be guided on the next steps."
             ]
         },
-        "Complaint Process": {
+        "Complaint resolution Process": {
             "Steps": [
                 "Obtain the Complaint Form available at any branch or downloadable from our website.",
                 "Fill out the form with details of your complaint, including any supporting documents.",
                 "Submit the form at any branch or email it to complaints@fastinvestments.com.",
                 "Receive an acknowledgment of your complaint within 3 working days, along with a resolution timeline.",
-                "Our team will investigate and resolve your complaint within the specified timeline. You will be kept informed of the progress."
-            ]
+                "Our team will investigate and resolve your complaint within the specified timeline. You will be kept informed of the progress through regular updates via email or phone.",
+                "If the complaint is complex and requires more time, you will be notified of the extended timeline and the reasons for the delay."
+            ],
+            "SLA": {
+                "Acknowledgment": "Within 1 working days",
+                "Initial Response": "Within 2 working days",
+                "Resolution": "Within 3 working days for standard complaints, up to 5 working days for complex issues"
+            },
+            "Communication": {
+                "Updates": "You will receive regular updates on the status of your complaint via email or phone.",
+                "Final Resolution": "A detailed resolution report will be provided via email or postal mail, based on your preference."
+            }
         }
     }
 }
