@@ -81,13 +81,28 @@ internal class Program
             {
                 history.AddUserMessage(input);
 
-                var response = await chatCompletionSevice.GetChatMessageContentAsync(history, promptExecutionSettings, kernel);
-                history.AddMessage(response.Role, response.InnerContent!.ToString()!);
+                //var response = await chatCompletionSevice.GetChatMessageContentAsync(history, promptExecutionSettings, kernel);
+                //history.AddMessage(response.Role, response.InnerContent!.ToString()!);
+                //Console.WriteLine(response);
+
+                var result = chatCompletionSevice.GetStreamingChatMessageContentsAsync(
+                            history,
+                            executionSettings: promptExecutionSettings,
+                            kernel: kernel);
+
+                AuthorRole role = AuthorRole.User;
+                var msg = String.Empty;
+                
+                await foreach (var content in result)
+                {
+                    role = content.Role?? AuthorRole.User;
+                    Console.Write(content.Content);
+                    msg += content.Content;
+                }
+                history.AddMessage(role, msg);
 
                 logger.LogInformation("User Input: {input}", input);
-                logger.LogInformation("Response: {response}", response.InnerContent);
-
-                Console.WriteLine(response);
+                logger.LogInformation("Response: {response}", msg);                
 
                 PrintChatHistory(history);
             }
