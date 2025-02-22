@@ -16,28 +16,23 @@ internal class Program
 
         var logger = kernel.GetRequiredService<ILogger<Program>>();
 
-        var configOptions = new AzureServiceBusOptions {
+        var configOptions = new AzureServiceBusOptions
+        {
             ServiceBusConnectionString = AppSetting.ServiceBusConnectionString,
             TopicName = AppSetting.TopicName,
             SubscriptionName = AppSetting.SubscriptionName,
-            ProcessErrorHandler = ErrorHandler, 
-            ProcessMessageHandler = MessageHandler };
-
-
+            ProcessErrorHandler = ErrorHandler,
+            ProcessMessageHandler = MessageHandler
+        };
 
         var handler = QueueFactory.CreateQueueHandler(QueueType.AzureServiceBusTopic);
-        var processor = handler.client.CreateProcessor(TopicName, SubscriptionName, new ServiceBusProcessorOptions());
-
-        processor.ProcessMessageAsync += MessageHandler;
-        processor.ProcessErrorAsync += ErrorHandler;
-
-        await processor.StartProcessingAsync();
+        await handler.ConfigureAsync(configOptions);
+        await handler.StartProcessingAsync();
 
         logger.LogInformation("Press any key to stop the processor...");
         Console.ReadKey();
 
-        await processor.StopProcessingAsync();
-        await processor.DisposeAsync();
+        await handler.StopProcessingAsync();
     }
 
     private static async Task MessageHandler(ProcessMessageEventArgs args)

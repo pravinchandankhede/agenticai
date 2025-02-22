@@ -1,23 +1,36 @@
 ﻿namespace BankingMAS.Core.ServiceBus;
 
 using Azure.Messaging.ServiceBus;
+using System.Threading.Tasks;
 
 internal class AzureServiceBusTopicHandler : IQueueHandler
 {
-    public ServiceBusClient GetServiceBusClient()
+    private ServiceBusProcessor? _processor;
+    private ServiceBusClient? _client;  
+
+    public async Task ConfigureAsync(AzureServiceBusOptions options)
     {
-        await using var client = new ServiceBusClient(ServiceBusConnectionString);
-        var processor = client.CreateProcessor(TopicName, SubscriptionName, new ServiceBusProcessorOptions());
+        _client = new ServiceBusClient(options.ServiceBusConnectionString);
+        _processor = _client.CreateProcessor(options.TopicName, options.SubscriptionName, new ServiceBusProcessorOptions());
 
-        processor.ProcessMessageAsync += MessageHandler;
-        processor.ProcessErrorAsync += ErrorHandler;
+        _processor.ProcessMessageAsync += options.ProcessMessageHandler;
+        _processor.ProcessErrorAsync += options.ProcessErrorHandler;               
+    }
 
-        await processor.StartProcessingAsync();
+    public async Task StartProcessingAsync()
+    {
+        if(_processor is not null)
+        {
+            await _processor.StartProcessingAsync();
+        }
+    }
 
-        logger.LogInformation("Press any key to stop the processor...");
-        Console.ReadKey();
-
-        await processor.StopProcessingAsync();
-        await processor.DisposeAsync();
+    public async Task StopProcessingAsync()
+    {
+        if (_processor is not null)
+        {
+            await _processor.StopProcessingAsync();
+            await _processor.DisposeAsync();
+        }
     }
 }
