@@ -63,12 +63,15 @@ internal class Program
 
         history.AddUserMessage(input);
 
-        var result = chatCompletionSevice.GetStreamingChatMessageContentsAsync(
-                            history,
-                            executionSettings: promptExecutionSettings,
-                            kernel: kernel);
+        //var result = chatCompletionSevice.GetStreamingChatMessageContentsAsync(
+        //                    history,
+        //                    executionSettings: promptExecutionSettings,
+        //                    kernel: kernel);
 
-        Console.WriteLine($"result: {result}");
+        var response = await chatCompletionSevice.GetChatMessageContentAsync(history, promptExecutionSettings, kernel);
+        history.AddMessage(response.Role, response.InnerContent!.ToString()!);
+        Console.WriteLine(response);
+        Console.WriteLine($"result: {response.InnerContent}");
         await args.CompleteMessageAsync(args.Message);
     }
 
