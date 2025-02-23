@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 public class Account
 {
     [Key]
-    public int AccountId { get; set; }
+    public Int32 AccountId { get; set; }
 
     [Required]
     [MaxLength(50)]
@@ -19,13 +19,13 @@ public class Account
     public required String AccountType { get; set; }
 
     [Required]
-    public decimal Balance { get; set; }
+    public Decimal Balance { get; set; }
 
     [Required]
-    public int CustomerId { get; set; }
+    public Int32 CustomerId { get; set; }
 
     [Timestamp]
-    public required byte[] RowVersion { get; set; }
+    public required Byte[] RowVersion { get; set; }
 
     [Required]
     [MaxLength(50)]
@@ -40,7 +40,7 @@ public class Account
     public DateTime? ModifiedOn { get; set; }
 
     [Required]
-    public bool IsActive { get; set; }
+    public Boolean IsActive { get; set; }
 
     [ForeignKey("CustomerId")]
     public required Customer Customer { get; set; }
@@ -50,7 +50,7 @@ public class Account
 public class CreditCard
 {
     [Key]
-    public int CreditCardId { get; set; }
+    public Int32 CreditCardId { get; set; }
 
     [Required]
     [MaxLength(50)]
@@ -64,13 +64,13 @@ public class CreditCard
     public DateTime ExpiryDate { get; set; }
 
     [Required]
-    public decimal CreditLimit { get; set; }
+    public Decimal CreditLimit { get; set; }
 
     [Required]
-    public int CustomerId { get; set; }
+    public Int32 CustomerId { get; set; }
 
     [Timestamp]
-    public required byte[] RowVersion { get; set; }
+    public required Byte[] RowVersion { get; set; }
 
     [Required]
     [MaxLength(50)]
@@ -85,17 +85,17 @@ public class CreditCard
     public DateTime? ModifiedOn { get; set; }
 
     [Required]
-    public bool IsActive { get; set; }
+    public Boolean IsActive { get; set; }
 
     [ForeignKey("CustomerId")]
     public required Customer Customer { get; set; }
 }
 
-[Table("Policie")]
+[Table("Policy")]
 public class Policy
 {
     [Key]
-    public int PolicyId { get; set; }
+    public Int32 PolicyId { get; set; }
 
     [Required]
     [MaxLength(50)]
@@ -112,13 +112,13 @@ public class Policy
     public DateTime EndDate { get; set; }
 
     [Required]
-    public decimal PremiumAmount { get; set; }
+    public Decimal PremiumAmount { get; set; }
 
     [Required]
-    public int CustomerId { get; set; }
+    public Int32 CustomerId { get; set; }
 
     [Timestamp]
-    public required byte[] RowVersion { get; set; }
+    public required Byte[] RowVersion { get; set; }
 
     [Required]
     [MaxLength(50)]
@@ -133,7 +133,7 @@ public class Policy
     public DateTime? ModifiedOn { get; set; }
 
     [Required]
-    public bool IsActive { get; set; }
+    public Boolean IsActive { get; set; }
 
     [ForeignKey("CustomerId")]
     public required Customer Customer { get; set; }
@@ -143,14 +143,14 @@ public class Policy
 public class LoanApplication
 {
     [Key]
-    public int LoanApplicationId { get; set; }
+    public Int32 LoanApplicationId { get; set; }
 
     [Required]
     [MaxLength(50)]
     public required String ApplicationNumber { get; set; }
 
     [Required]
-    public decimal LoanAmount { get; set; }
+    public Decimal LoanAmount { get; set; }
 
     [Required]
     [MaxLength(50)]
@@ -160,10 +160,10 @@ public class LoanApplication
     public DateTime ApplicationDate { get; set; }
 
     [Required]
-    public int CustomerId { get; set; }
+    public Int32 CustomerId { get; set; }
 
     [Timestamp]
-    public required byte[] RowVersion { get; set; }
+    public required Byte[] RowVersion { get; set; }
 
     [Required]
     [MaxLength(50)]
@@ -178,7 +178,7 @@ public class LoanApplication
     public DateTime? ModifiedOn { get; set; }
 
     [Required]
-    public bool IsActive { get; set; }
+    public Boolean IsActive { get; set; }
 
     [ForeignKey("CustomerId")]
     public required Customer Customer { get; set; }
@@ -188,19 +188,19 @@ public class LoanApplication
 public class CreditChecking
 {
     [Key]
-    public int CreditCheckingId { get; set; }
+    public Int32 CreditCheckingId { get; set; }
 
     [Required]
     public DateTime CheckDate { get; set; }
 
     [Required]
-    public int CreditScore { get; set; }
+    public Int32 CreditScore { get; set; }
 
     [Required]
-    public int CustomerId { get; set; }
+    public Int32 CustomerId { get; set; }
 
     [Timestamp]
-    public required byte[] RowVersion { get; set; }
+    public required Byte[] RowVersion { get; set; }
 
     [Required]
     [MaxLength(50)]
@@ -215,7 +215,7 @@ public class CreditChecking
     public DateTime? ModifiedOn { get; set; }
 
     [Required]
-    public bool IsActive { get; set; }
+    public Boolean IsActive { get; set; }
 
     [ForeignKey("CustomerId")]
     public required Customer Customer { get; set; }
@@ -225,23 +225,23 @@ public class CreditChecking
 public class Payment
 {
     [Key]
-    public int PaymentId { get; set; }
+    public Int32 PaymentId { get; set; }
 
     [Required]
     public DateTime PaymentDate { get; set; }
 
     [Required]
-    public decimal Amount { get; set; }
+    public Decimal Amount { get; set; }
 
     [Required]
     [MaxLength(50)]
     public required String PaymentMethod { get; set; }
 
     [Required]
-    public int AccountId { get; set; }
+    public Int32 AccountId { get; set; }
 
     [Timestamp]
-    public required byte[] RowVersion { get; set; }
+    public required Byte[] RowVersion { get; set; }
 
     [Required]
     [MaxLength(50)]
@@ -256,7 +256,7 @@ public class Payment
     public DateTime? ModifiedOn { get; set; }
 
     [Required]
-    public bool IsActive { get; set; }
+    public Boolean IsActive { get; set; }
 
     [ForeignKey("AccountId")]
     public required Account Account { get; set; }
@@ -266,7 +266,7 @@ public class Payment
 public class Customer
 {
     [Key]
-    public int CustomerId { get; set; }
+    public Int32 CustomerId { get; set; }
 
     [Required]
     [MaxLength(50)]
@@ -299,7 +299,7 @@ public class Customer
     public required String ZipCode { get; set; }
 
     [Timestamp]
-    public required byte[] RowVersion { get; set; }
+    public required Byte[] RowVersion { get; set; }
 
     [Required]
     [MaxLength(50)]
@@ -314,33 +314,33 @@ public class Customer
     public DateTime? ModifiedOn { get; set; }
 
     [Required]
-    public bool IsActive { get; set; }
+    public Boolean IsActive { get; set; }
 }
 
 [Table("Transaction")]
 public class Transaction
 {
     [Key]
-    public int TransactionId { get; set; }
+    public Int32 TransactionId { get; set; }
 
     [Required]
     public DateTime TransactionDate { get; set; }
 
     [Required]
-    public decimal Amount { get; set; }
+    public Decimal Amount { get; set; }
 
     [Required]
     [MaxLength(50)]
     public required String TransactionType { get; set; }
 
     [Required]
-    public int AccountId { get; set; }
+    public Int32 AccountId { get; set; }
 
     [Required]
-    public int CustomerId { get; set; }
+    public Int32 CustomerId { get; set; }
 
     [Timestamp]
-    public required byte[] RowVersion { get; set; }
+    public required Byte[] RowVersion { get; set; }
 
     [Required]
     [MaxLength(50)]
@@ -355,7 +355,7 @@ public class Transaction
     public DateTime? ModifiedOn { get; set; }
 
     [Required]
-    public bool IsActive { get; set; }
+    public Boolean IsActive { get; set; }
 
     [ForeignKey("AccountId")]
     public required Account Account { get; set; }

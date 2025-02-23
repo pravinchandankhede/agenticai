@@ -8,7 +8,7 @@ public class BankingContext : DbContext
 
     public BankingContext(IConfiguration configuration)
     {
-        _connectionString =  configuration.GetConnectionString("DefaultConnection");        
+        _connectionString =  configuration.GetConnectionString("DefaultConnection")!;        
     }
 
     public BankingContext(string connectionString)
