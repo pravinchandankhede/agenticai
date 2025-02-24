@@ -1,6 +1,7 @@
 ﻿namespace BankServices.Models;
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 public class BankingContext : DbContext
 {
@@ -29,7 +30,7 @@ public class BankingContext : DbContext
     {
         if (!optionsBuilder.IsConfigured)
         {
-            optionsBuilder.UseSqlServer(_connectionString);
+            _ = optionsBuilder.UseSqlServer(_connectionString);
         }
     }
 }
