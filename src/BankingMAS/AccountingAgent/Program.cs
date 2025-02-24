@@ -16,6 +16,9 @@ internal class Program
     {
         var builder = KernelFactory.GetKernelBuilder();
         kernel = builder.Build();
+
+        kernel.ImportPluginFromType<BankingPlugins.AccountPlugin>();
+
         var logger = kernel.GetRequiredService<ILogger<Program>>();
 
         var configOptions = new AzureServiceBusOptions

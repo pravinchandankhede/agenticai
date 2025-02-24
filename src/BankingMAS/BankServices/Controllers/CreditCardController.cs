@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 [ApiController]
 public class CreditCardController : ControllerBase
 {
-    private readonly GenericService<CreditCard> _creditCardService;
+    private readonly CreditCardService _creditCardService;
 
-    public CreditCardController(GenericService<CreditCard> creditCardService)
+    public CreditCardController(CreditCardService creditCardService)
     {
         _creditCardService = creditCardService;
     }

@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 [ApiController]
 public class PolicyController : ControllerBase
 {
-    private readonly GenericService<Policy> _policyService;
+    private readonly PolicyService _policyService;
 
-    public PolicyController(GenericService<Policy> policyService)
+    public PolicyController(PolicyService policyService)
     {
         _policyService = policyService;
     }

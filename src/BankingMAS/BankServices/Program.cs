@@ -50,22 +50,40 @@ public class Program
             options.UseSqlServer(connectionString));
 
         var services = builder.Services;
-        services.AddScoped<Repository<Account>>();
-        services.AddScoped<Repository<CreditCard>>();
-        services.AddScoped<Repository<Policy>>();
-        services.AddScoped<Repository<LoanApplication>>();
-        services.AddScoped<Repository<CreditChecking>>();
-        services.AddScoped<Repository<Payment>>();
-        services.AddScoped<Repository<Customer>>();
-        services.AddScoped<Repository<Transaction>>();
-        
-        services.AddScoped<GenericService<Account>>();
-        services.AddScoped<GenericService<CreditCard>>();
-        services.AddScoped<GenericService<Policy>>();
-        services.AddScoped<GenericService<LoanApplication>>();
-        services.AddScoped<GenericService<CreditChecking>>();
-        services.AddScoped<GenericService<Payment>>();
-        services.AddScoped<GenericService<Customer>>();
-        services.AddScoped<GenericService<Transaction>>();
+        //services.AddScoped<Repository<Account>>();
+        //services.AddScoped<Repository<CreditCard>>();
+        //services.AddScoped<Repository<Policy>>();
+        //services.AddScoped<Repository<LoanApplication>>();
+        //services.AddScoped<Repository<CreditChecking>>();
+        //services.AddScoped<Repository<Payment>>();
+        //services.AddScoped<Repository<Customer>>();
+        //services.AddScoped<Repository<Transaction>>();
+
+        services.AddScoped<AccountRepository>();
+        services.AddScoped<CustomerRepository>();
+        services.AddScoped<CreditCardRepository>();
+        services.AddScoped<CreditCheckingRepository>();
+        services.AddScoped<LoanApplicationRepository>();
+        services.AddScoped<PaymentRepository>();
+        services.AddScoped<PolicyRepository>();
+        services.AddScoped<TransactionRepository>();
+
+        //services.AddScoped<GenericService<Account>>();
+        //services.AddScoped<GenericService<CreditCard>>();
+        //services.AddScoped<GenericService<Policy>>();
+        //services.AddScoped<GenericService<LoanApplication>>();
+        //services.AddScoped<GenericService<CreditChecking>>();
+        //services.AddScoped<GenericService<Payment>>();
+        //services.AddScoped<GenericService<Customer>>();
+        //services.AddScoped<GenericService<Transaction>>();
+
+        services.AddScoped<AccountService>();
+        services.AddScoped<CustomerService>();
+        services.AddScoped<PaymentService>();
+        services.AddScoped<PolicyService>();
+        services.AddScoped<TransactionService>();
+        services.AddScoped<CreditCardService>();
+        services.AddScoped<CreditCheckingService>();
+        services.AddScoped<LoanApplicationService>();
     }
 }

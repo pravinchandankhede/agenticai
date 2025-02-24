@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 [ApiController]
 public class CustomerController : ControllerBase
 {
-    private readonly GenericService<Customer> _customerService;
+    private readonly CustomerService _customerService;
 
-    public CustomerController(GenericService<Customer> customerService)
+    public CustomerController(CustomerService customerService)
     {
         _customerService = customerService;
     }

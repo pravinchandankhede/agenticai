@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 [ApiController]
 public class AccountController : ControllerBase
 {
-    private readonly GenericService<Account> _accountService;
+    private readonly AccountService _accountService;
 
-    public AccountController(GenericService<Account> accountService)
+    public AccountController(AccountService accountService)
     {
         _accountService = accountService;
     }

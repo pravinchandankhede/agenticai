@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 [ApiController]
 public class LoanApplicationController : ControllerBase
 {
-    private readonly GenericService<LoanApplication> _loanApplicationService;
+    private readonly LoanApplicationService _loanApplicationService;
 
-    public LoanApplicationController(GenericService<LoanApplication> loanApplicationService)
+    public LoanApplicationController(LoanApplicationService loanApplicationService)
     {
         _loanApplicationService = loanApplicationService;
     }

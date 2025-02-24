@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 [ApiController]
 public class TransactionController : ControllerBase
 {
-    private readonly GenericService<Transaction> _transactionService;
+    private readonly TransactionService _transactionService;
 
-    public TransactionController(GenericService<Transaction> transactionService)
+    public TransactionController(TransactionService transactionService)
     {
         _transactionService = transactionService;
     }

@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 [ApiController]
 public class CreditCheckingController : ControllerBase
 {
-    private readonly GenericService<CreditChecking> _creditCheckingService;
+    private readonly CreditCheckingService _creditCheckingService;
 
-    public CreditCheckingController(GenericService<CreditChecking> creditCheckingService)
+    public CreditCheckingController(CreditCheckingService creditCheckingService)
     {
         _creditCheckingService = creditCheckingService;
     }
