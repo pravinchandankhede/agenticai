@@ -12,7 +12,9 @@ internal class Program
     static async Task Main()
     {
         var builder = KernelFactory.GetKernelBuilder();
-        kernel = builder.Build();       
+        kernel = builder.Build();
+
+        kernel.ImportPluginFromType<MASPlugin>();
 
         var logger = kernel.GetRequiredService<ILogger<Program>>();
 
