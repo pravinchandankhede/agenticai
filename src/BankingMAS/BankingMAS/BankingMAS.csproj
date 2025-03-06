@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CommonAgent\CommonAgent.csproj" />
+    <ProjectReference Include="..\Core\Core.csproj" />
   </ItemGroup>
 
 </Project>

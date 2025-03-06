@@ -12,7 +12,7 @@ internal class AzureServiceBusTopicHandler : IQueueHandler
     {
         _client = new ServiceBusClient(options.ServiceBusConnectionString);
         _processor = _client.CreateProcessor(options.TopicName, options.SubscriptionName, new ServiceBusProcessorOptions());
-
+                
         _processor.ProcessMessageAsync += options.ProcessMessageHandler;
         _processor.ProcessErrorAsync += options.ProcessErrorHandler;               
     }
