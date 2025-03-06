@@ -10,7 +10,20 @@ class MessageSender : IMessageSender
 
     public MessageResponse SendMessage(MessageRequest messageRequest)
     {
-
+        if(_client is not null)
+        {
+            var sender = _client.CreateSender(messageRequest.QueueName);
+            sender.SendMessageAsync(new ServiceBusMessage
+            {
+                Subject = messageRequest.AgentName,
+            });
+        }
+        return new MessageResponse
+        {
+            QueueName = messageRequest.QueueName,
+            Message = messageRequest.Message,
+            AgentName = messageRequest.AgentName
+        };
     }
 
     public async Task ConfigureAsync(AzureServiceBusOptions options)

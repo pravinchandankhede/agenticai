@@ -10,7 +10,18 @@ public class MASPlugin
     [KernelFunction, Description("Gets an account balance for a customer, provide transactions details, summary and other accounting information")]
     public String GetAccountBalance()
     {
-        return "Pls connect with accounting agent for these details";
+        var agentInfo = AgentRegistry.GetAgent("accounting");
+
+        var sender = QueueFactory.GetMessageSender(QueueType.AzureServiceBusQueue);
+
+        var response = sender.SendMessage(new Core.ServiceBusClient.MessageRequest
+        {
+            AgentName = agentInfo.Name,
+            QueueName = agentInfo.QueueName,
+            Message = $"Process Loan Application for user {"pravin"}"
+        });
+
+        return "connecting with accounting agent for these details";
     }
 
     [KernelFunction, Description("This helps in submitting a loan application and starts processing it.")]
@@ -29,6 +40,4 @@ public class MASPlugin
 
         return $"Sent the application to loan processing agent. application number is {10011101}";
     }
-
-
 }
