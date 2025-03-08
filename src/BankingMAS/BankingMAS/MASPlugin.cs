@@ -22,10 +22,12 @@ public class MASPlugin
             ProcessErrorHandler = (args) => { return null; },
             ProcessMessageHandler = (args) => { return null; }
         });
-                
+
         var response = sender.SendMessage(new Core.ServiceBusClient.MessageRequest
         {
-            AgentName = agentInfo.Name,
+            ReceiverAgentName = agentInfo.Name,
+            SenderAgentName = "bankingmas",
+            UserId = "john doe",
             QueueName = agentInfo.QueueName,
             Message = $"get account balance for john doe"
         });
@@ -42,7 +44,9 @@ public class MASPlugin
 
         var response = sender.SendMessage(new Core.ServiceBusClient.MessageRequest
         {
-            AgentName = agentInfo.Name,
+            ReceiverAgentName = agentInfo.Name,
+            SenderAgentName = "bankingmas",
+            UserId = "john doe",
             QueueName = agentInfo.QueueName,
             Message = $"Process Loan Application for user {"pravin"}"
         });

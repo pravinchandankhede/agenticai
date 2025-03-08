@@ -3,6 +3,7 @@
 using Azure.Messaging.ServiceBus;
 using BankingMAS.CommonAgent;
 using BankingMAS.Core.ServiceBus;
+using BankingMAS.Core.ServiceBusClient;
 using BankingMAS.SharedLibrary;
 using Microsoft.Extensions.Logging;
 using Microsoft.SemanticKernel;
@@ -47,6 +48,7 @@ internal class Program
 
         var logger = kernel.GetRequiredService<ILogger<Program>>();
 
+        var msg = Message.FromJson(args.Message.Body.ToString());
         var body = args.Message.Body.ToString();
 
         var chatCompletionSevice = kernel.GetRequiredService<IChatCompletionService>();
