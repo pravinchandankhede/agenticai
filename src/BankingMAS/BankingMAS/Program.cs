@@ -66,10 +66,10 @@ internal class Program
         {
             ServiceBusConnectionString = AppSetting.ServiceBusConnectionString,
             TopicName = "bankingmas", // AppSetting.TopicName,
-            SubscriptionName = AppSetting.SubscriptionName,
+            SubscriptionName = "bankingmas",//AppSetting.SubscriptionName,
             ProcessErrorHandler = ErrorHandler,
             ProcessMessageHandler = MessageHandler
-        };
+        }; 
 
         queueHandler = QueueFactory.CreateQueueHandler(QueueType.AzureServiceBusTopic);
         await queueHandler.ConfigureAsync(configOptions);

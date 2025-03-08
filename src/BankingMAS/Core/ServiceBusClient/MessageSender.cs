@@ -16,6 +16,10 @@ class MessageSender : IMessageSender
             sender.SendMessageAsync(new ServiceBusMessage
             {
                 Subject = messageRequest.AgentName,
+                Body = new BinaryData(messageRequest.Message),
+                ContentType = "application/json",
+                CorrelationId = Guid.NewGuid().ToString(),
+                MessageId = Guid.NewGuid().ToString(),
             });
         }
         return new MessageResponse

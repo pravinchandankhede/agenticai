@@ -7,7 +7,7 @@ public static class AgentRegistry
     static AgentRegistry()
     {
         Agents = new Agent[]
-            { 
+            {
                 new Agent{ Name="Accounting", QueueName="accounting"},
                 new Agent{ Name="Approval", QueueName="approval"},
                 new Agent{ Name="Credit", QueueName="credit"},
@@ -19,6 +19,6 @@ public static class AgentRegistry
     //This has to be a complex matching algorithm
     public static Agent GetAgent(String name)
     {
-        return Agents.FirstOrDefault(m=>m.Name==name)!;
+        return Agents.FirstOrDefault(m => String.Compare(m.Name, name, true) == 0)!;
     }
 }
