@@ -13,6 +13,7 @@ public static class AgentRegistry
                 new Agent{ Name="Credit", QueueName="credit"},
                 new Agent{ Name="Payment", QueueName="payment"},
                 new Agent{ Name="Policy", QueueName="policy"},
+                new Agent{ Name="BankingMAS", QueueName="bankingmas"},
             };
     }
 

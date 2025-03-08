@@ -2,12 +2,14 @@
 
 using Azure.Messaging.ServiceBus;
 using BankingMAS.CommonAgent;
+using BankingMAS.Core.AgentRegistry;
 using BankingMAS.Core.ServiceBus;
 using BankingMAS.Core.ServiceBusClient;
 using BankingMAS.SharedLibrary;
 using Microsoft.Extensions.Logging;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.ChatCompletion;
+using System.Reflection;
 
 internal class Program
 {
@@ -49,7 +51,7 @@ internal class Program
         var logger = kernel.GetRequiredService<ILogger<Program>>();
 
         var msg = Message.FromJson(args.Message.Body.ToString());
-        var body = args.Message.Body.ToString();
+        var body = msg.Body;
 
         var chatCompletionSevice = kernel.GetRequiredService<IChatCompletionService>();
         var promptExecutionSettings = new PromptExecutionSettings()
@@ -78,11 +80,36 @@ internal class Program
         Console.WriteLine(response);
         Console.WriteLine($"result: {response.InnerContent}");
         await args.CompleteMessageAsync(args.Message);
+        await SendReply(msg.SenderAgentName, response.ToString());
     }
 
     private static async Task ErrorHandler(ProcessErrorEventArgs args)
     {
         Console.WriteLine(args.Exception.ToString());
         await Task.CompletedTask;
+    }
+
+    private static async Task SendReply(String receiverAgentName, String reply)
+    {
+        var agentInfo = AgentRegistry.GetAgent(receiverAgentName);
+
+        var sender = QueueFactory.GetMessageSender(QueueType.AzureServiceBusQueue);
+        await sender.ConfigureAsync(new AzureServiceBusOptions
+        {
+            ServiceBusConnectionString = AppSetting.ServiceBusConnectionString,
+            TopicName = agentInfo.QueueName,
+            SubscriptionName = "",
+            ProcessErrorHandler = (args) => { return null; },
+            ProcessMessageHandler = (args) => { return null; }
+        });
+
+        var response = sender.SendMessage(new Core.ServiceBusClient.MessageRequest
+        {
+            ReceiverAgentName = receiverAgentName,
+            SenderAgentName = "accounting",
+            UserId = "john doe",
+            QueueName = agentInfo.QueueName,
+            Message = reply
+        });
     }
 }
