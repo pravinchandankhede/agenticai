@@ -9,7 +9,6 @@ using BankingMAS.SharedLibrary;
 using Microsoft.Extensions.Logging;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.ChatCompletion;
-using System.Reflection;
 
 internal class Program
 {
@@ -78,7 +77,6 @@ internal class Program
         var response = await chatCompletionSevice.GetChatMessageContentAsync(history, promptExecutionSettings, kernel);
         history.AddMessage(response.Role, response.InnerContent!.ToString()!);
         Console.WriteLine(response);
-        Console.WriteLine($"result: {response.InnerContent}");
         await args.CompleteMessageAsync(args.Message);
         await SendReply(msg.SenderAgentName, response.ToString());
     }

@@ -55,7 +55,7 @@ internal class Program
             
             history.AddMessage(response.Role, response.InnerContent!.ToString()!);
             Console.WriteLine(response);
-            Console.WriteLine($"result: {response.InnerContent}");
+            //Console.WriteLine($"result: {response.InnerContent}");
         }
 
         await queueHandler.StopProcessingAsync();

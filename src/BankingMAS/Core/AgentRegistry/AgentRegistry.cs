@@ -17,7 +17,7 @@ public static class AgentRegistry
             };
     }
 
-    //This has to be a complex matching algorithm
+    //This has to be a complex matching algorithm based on name, features, etc.
     public static Agent GetAgent(String name)
     {
         return Agents.FirstOrDefault(m => String.Compare(m.Name, name, true) == 0)!;
