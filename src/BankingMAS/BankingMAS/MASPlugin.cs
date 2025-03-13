@@ -1,6 +1,6 @@
 ﻿namespace BankingMAS;
 
-using BankingMAS.Core.AgentRegistry;
+using BankingMAS.AICore.AgentRegistry;
 using BankingMAS.Core.ServiceBus;
 using BankingMAS.SharedLibrary;
 using Microsoft.SemanticKernel;

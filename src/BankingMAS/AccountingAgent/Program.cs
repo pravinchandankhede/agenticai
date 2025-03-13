@@ -2,7 +2,7 @@
 
 using Azure.Messaging.ServiceBus;
 using BankingMAS.CommonAgent;
-using BankingMAS.Core.AgentRegistry;
+using BankingMAS.AICore.AgentRegistry;
 using BankingMAS.Core.ServiceBus;
 using BankingMAS.Core.ServiceBusClient;
 using BankingMAS.SharedLibrary;

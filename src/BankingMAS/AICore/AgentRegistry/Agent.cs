@@ -1,4 +1,4 @@
-﻿namespace BankingMAS.Core.AgentRegistry;
+﻿namespace BankingMAS.AICore.AgentRegistry;
 
 public class Agent
 {
