@@ -39,7 +39,7 @@ public class KernelFactory
         builder.Services.AddLogging(loggingBuilder =>
         {
             loggingBuilder.AddConsole();
-            loggingBuilder.SetMinimumLevel(LogLevel.None);
+            loggingBuilder.SetMinimumLevel(LogLevel.Information);
         });
 
         return builder;

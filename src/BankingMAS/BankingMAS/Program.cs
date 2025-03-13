@@ -85,7 +85,7 @@ internal class Program
     private static async Task MessageHandler(ProcessMessageEventArgs args)
     {
         var msg = Message.FromJson(args.Message.Body.ToString());
-        Console.WriteLine(msg.Body);
+        Console.WriteLine($"Responding Agent: {msg.SenderAgentName} Response: {msg.Body}");
     }
 
     private static async Task ErrorHandler(ProcessErrorEventArgs args)

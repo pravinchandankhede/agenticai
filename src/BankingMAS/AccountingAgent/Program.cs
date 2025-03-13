@@ -50,6 +50,7 @@ internal class Program
         var logger = kernel.GetRequiredService<ILogger<Program>>();
 
         var msg = Message.FromJson(args.Message.Body.ToString());
+        Console.WriteLine($"Sender: {msg.SenderAgentName} - Receiver: {msg.ReceiverAgentName} - Body: {msg.Body}");
         var body = msg.Body;
 
         var chatCompletionSevice = kernel.GetRequiredService<IChatCompletionService>();
