@@ -50,6 +50,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 EndProject
 Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "ArchitectureValidation", "ArchitectureValidation\ArchitectureValidation.modelproj", "{DA4610A1-C50F-F3DB-F80F-0599DF55C70B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvoiceAgent", "InvoiceAgent\InvoiceAgent.csproj", "{CF81AD4B-6AA0-4980-8CC5-14B16045AF50}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -116,6 +118,10 @@ Global
 		{DA4610A1-C50F-F3DB-F80F-0599DF55C70B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA4610A1-C50F-F3DB-F80F-0599DF55C70B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA4610A1-C50F-F3DB-F80F-0599DF55C70B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF81AD4B-6AA0-4980-8CC5-14B16045AF50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF81AD4B-6AA0-4980-8CC5-14B16045AF50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF81AD4B-6AA0-4980-8CC5-14B16045AF50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF81AD4B-6AA0-4980-8CC5-14B16045AF50}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -135,6 +141,7 @@ Global
 		{450E25D6-39C1-431F-8082-13A8BD152F0D} = {768AFD25-B2B4-4690-A27E-C9BB41DAFDC6}
 		{7796A1B0-DAA7-49AA-8EA7-B8E0EAC79538} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{DA4610A1-C50F-F3DB-F80F-0599DF55C70B} = {A1F5633F-74C5-482A-A17B-C03BF231F47F}
+		{CF81AD4B-6AA0-4980-8CC5-14B16045AF50} = {FF30C0A6-6324-42FC-A2B0-FEE5236E29D2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EBBEA8F6-FD0A-4EFF-93CC-B834F795230E}
