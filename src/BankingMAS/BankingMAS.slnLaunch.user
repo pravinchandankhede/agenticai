@@ -9,6 +9,10 @@
       {
         "Path": "BankingMAS\\BankingMAS.csproj",
         "Action": "Start"
+      },
+      {
+        "Path": "InvoiceAgent\\InvoiceAgent.csproj",
+        "Action": "Start"
       }
     ]
   }

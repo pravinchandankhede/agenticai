@@ -20,7 +20,7 @@ internal class Program
         var builder = KernelFactory.GetKernelBuilder();
         kernel = builder.Build();
 
-        kernel.ImportPluginFromType<BankingPlugins.AccountPlugin>();
+        kernel.ImportPluginFromType<BankingPlugins.InvoicePlugin>();
 
         var logger = kernel.GetRequiredService<ILogger<Program>>();
 
@@ -28,7 +28,7 @@ internal class Program
         {
             ServiceBusConnectionString = AppSetting.ServiceBusConnectionString,
             TopicName = "invoice", // AppSetting.TopicName,
-            SubscriptionName = AppSetting.SubscriptionName,
+            SubscriptionName = "agent",//AppSetting.SubscriptionName,
             ProcessErrorHandler = ErrorHandler,
             ProcessMessageHandler = MessageHandler
         };

@@ -14,10 +14,12 @@ public static class AgentRegistry
                 new Agent{ Name="Payment", QueueName="payment"},
                 new Agent{ Name="Policy", QueueName="policy"},
                 new Agent{ Name="BankingMAS", QueueName="bankingmas"},
+                new Agent{ Name="Invoice", QueueName="invoice"},
             };
     }
 
     //This has to be a complex matching algorithm based on name, features, etc.
+    //you can use Intent identification using LLM/Cognitive call to check which agent should actually handle the req
     public static Agent GetAgent(String name)
     {
         return Agents.FirstOrDefault(m => String.Compare(m.Name, name, true) == 0)!;

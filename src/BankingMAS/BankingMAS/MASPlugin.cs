@@ -53,4 +53,32 @@ public class MASPlugin
 
         return $"Sent the application to loan processing agent. application number is {10011101}";
     }
+
+    [KernelFunction, Description("Check and processes the invoice related queries from customers. Coordinates with the invoice agent to ensure smooth invoicing and " +
+        "manipulation, validation of invoices")]
+    public String ProcessInvoice()
+    {
+        var agentInfo = AgentRegistry.GetAgent("invoice");
+
+        var sender = QueueFactory.GetMessageSender(QueueType.AzureServiceBusQueue);
+        sender.ConfigureAsync(new AzureServiceBusOptions
+        {
+            ServiceBusConnectionString = AppSetting.ServiceBusConnectionString,
+            TopicName = agentInfo.QueueName,
+            SubscriptionName = "",
+            ProcessErrorHandler = (args) => { return null; },
+            ProcessMessageHandler = (args) => { return null; }
+        });
+
+        var response = sender.SendMessage(new Core.ServiceBusClient.MessageRequest
+        {
+            ReceiverAgentName = agentInfo.Name,
+            SenderAgentName = "bankingmas",
+            UserId = "john doe",
+            QueueName = agentInfo.QueueName,
+            Message = $"process invoice for john doe"
+        });
+
+        return "connecting with invoice agent for these details";
+    }
 }
