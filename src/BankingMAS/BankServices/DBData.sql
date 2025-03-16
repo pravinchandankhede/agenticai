@@ -186,3 +186,18 @@ VALUES
 ('2025-03-29', 4450.00, 'Withdrawal', 8, 8, DEFAULT, 'admin', GETDATE(), 'admin', GETDATE(), 1),
 ('2025-03-30', 4500.00, 'Deposit', 9, 9, DEFAULT, 'admin', GETDATE(), 'admin', GETDATE(), 1),
 ('2025-03-31', 4550.00, 'Withdrawal', 10, 10, DEFAULT, 'admin', GETDATE(), 'admin', GETDATE(), 1);
+
+
+INSERT INTO Invoice (InvoiceNumber, InvoiceType, Amount, CustomerId, RowVersion, CreatedBy, CreatedOn, ModifiedBy, ModifiedOn, IsActive)
+VALUES 
+('INV-1001', 'Service', 150.00, 1, DEFAULT, 'System', GETDATE(), 'System', GETDATE(), 1),
+('INV-1002', 'Product', 200.00, 2, DEFAULT, 'System', GETDATE(), 'System', GETDATE(), 1),
+('INV-1003', 'Service', 300.00, 3, DEFAULT, 'System', GETDATE(), 'System', GETDATE(), 1),
+('INV-1004', 'Product', 450.00, 4, DEFAULT, 'System', GETDATE(), 'System', GETDATE(), 1),
+('INV-1005', 'Service', 500.00, 5, DEFAULT, 'System', GETDATE(), 'System', GETDATE(), 1),
+('INV-1006', 'Product', 600.00, 6, DEFAULT, 'System', GETDATE(), 'System', GETDATE(), 1),
+('INV-1007', 'Service', 700.00, 7, DEFAULT, 'System', GETDATE(), 'System', GETDATE(), 1),
+('INV-1008', 'Product', 800.00, 8, DEFAULT, 'System', GETDATE(), 'System', GETDATE(), 1),
+('INV-1009', 'Service', 900.00, 9, DEFAULT, 'System', GETDATE(), 'System', GETDATE(), 1),
+('INV-1010', 'Product', 1000.00, 10, DEFAULT, 'System', GETDATE(), 'System', GETDATE(), 1);
+

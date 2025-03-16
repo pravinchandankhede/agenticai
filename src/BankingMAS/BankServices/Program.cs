@@ -67,6 +67,7 @@ public class Program
         services.AddScoped<PaymentRepository>();
         services.AddScoped<PolicyRepository>();
         services.AddScoped<TransactionRepository>();
+        services.AddScoped<InvoiceRepository>();
 
         //services.AddScoped<GenericService<Account>>();
         //services.AddScoped<GenericService<CreditCard>>();
@@ -85,5 +86,6 @@ public class Program
         services.AddScoped<CreditCardService>();
         services.AddScoped<CreditCheckingService>();
         services.AddScoped<LoanApplicationService>();
+        services.AddScoped<InvoiceService>();
     }
 }

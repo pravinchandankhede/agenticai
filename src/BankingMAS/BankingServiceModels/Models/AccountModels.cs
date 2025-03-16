@@ -363,3 +363,45 @@ public class Transaction
     [ForeignKey("CustomerId")]
     public required Customer Customer { get; set; }
 }
+
+[Table("Invoice")]
+public class Invoice
+{
+    [Key]
+    public Int32 InvoiceId { get; set; }
+
+    [Required]
+    [MaxLength(50)]
+    public required String InvoiceNumber { get; set; }
+
+    [Required]
+    [MaxLength(50)]
+    public required String InvoiceType { get; set; }
+
+    [Required]
+    public Decimal Amount { get; set; }
+
+    [Required]
+    public Int32 CustomerId { get; set; }
+
+    [Timestamp]
+    public required Byte[] RowVersion { get; set; }
+
+    [Required]
+    [MaxLength(50)]
+    public required String CreatedBy { get; set; }
+
+    [Required]
+    public DateTime CreatedOn { get; set; }
+
+    [MaxLength(50)]
+    public required String ModifiedBy { get; set; }
+
+    public DateTime? ModifiedOn { get; set; }
+
+    [Required]
+    public Boolean IsActive { get; set; }
+
+    [ForeignKey("CustomerId")]
+    public required Customer Customer { get; set; }
+}

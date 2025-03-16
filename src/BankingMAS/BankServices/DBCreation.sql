@@ -134,3 +134,17 @@ CREATE TABLE [Transaction] (
     FOREIGN KEY (AccountId) REFERENCES Account(AccountId),
     FOREIGN KEY (CustomerId) REFERENCES Customer(CustomerId)
 );
+
+CREATE TABLE Invoice (
+    InvoiceId INT PRIMARY KEY IDENTITY(1,1),
+    InvoiceNumber NVARCHAR(50) NOT NULL,
+    InvoiceType NVARCHAR(50) NOT NULL,
+    Amount DECIMAL(18, 2) NOT NULL,
+    CustomerId INT NOT NULL,
+    RowVersion ROWVERSION,
+    CreatedBy NVARCHAR(50) NOT NULL,
+    CreatedOn DATETIME NOT NULL DEFAULT GETDATE(),
+    ModifiedBy NVARCHAR(50),
+    ModifiedOn DATETIME,
+    IsActive BIT NOT NULL DEFAULT 1
+);

@@ -1,0 +1,123 @@
+FAST Logistics Company Invoice Processing Manual
+1. Introduction
+This manual outlines the detailed steps, rules, and processes for invoice processing at FAST Logistics Company. It is designed to ensure accuracy, compliance, and efficiency in handling invoices.
+
+2. Invoice Processing Workflow
+Step 1: Invoice Receipt
+Methods of Receipt:
+Email: Invoices received via email should be saved in the designated folder and logged in the Invoice Management System (IMS).
+Postal Mail: Physical invoices should be scanned and saved electronically, then logged in the IMS.
+Electronic Data Interchange (EDI): EDI invoices are automatically logged in the IMS.
+Action: Log the receipt of the invoice in the IMS with the following details:
+Date of receipt
+Source (email, postal mail, EDI)
+Initial review status (complete/incomplete)
+Step 2: Invoice Verification
+Check for Completeness:
+Ensure the invoice includes all mandatory fields:
+Invoice Number
+Invoice Date
+Vendor Name and Address
+Itemized List of Goods/Services
+Total Amount Due
+Payment Terms
+Validation:
+Verify the invoice against the purchase order (PO) and delivery receipt:
+Quantities: Ensure the quantities match the PO and delivery receipt.
+Prices: Confirm the prices are as agreed in the PO.
+Terms: Check payment terms and conditions.
+Discrepancies: Note any discrepancies and flag the invoice for further review.
+Step 3: Data Entry
+Input Details:
+Enter invoice details into the IMS:
+Vendor Information
+Invoice Amount
+Due Date
+Itemized Charges
+Double-Check: Review entered data for accuracy and completeness.
+Mandatory Fields:
+Ensure all mandatory fields are filled correctly:
+Invoice Number
+Invoice Date
+Vendor Name and Address
+Itemized List of Goods/Services
+Total Amount Due
+Payment Terms
+Step 4: Approval Workflow
+Routing:
+Route the invoice to the appropriate department for approval based on the amount and type of expense.
+Approval Levels:
+Invoices up to $1,000: Approved by Department Manager.
+Invoices $1,001 - $10,000: Approved by Finance Manager.
+Invoices above $10,000: Approved by CFO.
+Approval Process:
+Ensure the invoice is reviewed and approved by the necessary levels of management.
+Log approval status in the IMS.
+Step 5: Payment Processing
+Payment Method:
+Determine the payment method (e.g., bank transfer, check).
+Bank Transfer: Ensure bank details are accurate and initiate transfer.
+Check: Prepare and send the check to the vendor.
+Schedule Payment:
+Schedule the payment according to the terms agreed upon with the vendor.
+Log payment schedule in the IMS.
+Record Payment:
+Log the payment details in the IMS:
+Payment Date
+Payment Method
+Amount Paid
+Transaction Reference Number
+Step 6: Reconciliation
+Match Payments:
+Reconcile the payment with the invoice and PO:
+Ensure the payment matches the invoice amount.
+Confirm receipt of goods/services as per PO.
+Resolve Discrepancies:
+Investigate and resolve any discrepancies between the invoice and payment:
+Contact vendor for clarification if needed.
+Adjust records in IMS accordingly.
+Step 7: Archiving
+Storage:
+Archive the invoice and related documents electronically for future reference.
+Ensure documents are stored in a secure, accessible location.
+Retention Policy:
+Follow the company's document retention policy for storing invoices:
+Retain invoices for a minimum of 7 years.
+Ensure compliance with legal and regulatory requirements.
+
+3. Rules and Compliance
+Mandatory Fields
+Invoice Number
+Invoice Date
+Vendor Name and Address
+Itemized List of Goods/Services
+Total Amount Due
+Payment Terms
+Approval Limits
+Invoices up to $1,000: Approved by Department Manager.
+Invoices $1,001 - $10,000: Approved by Finance Manager.
+Invoices above $10,000: Approved by CFO.
+Payment Terms
+Standard payment terms are Net 30 days unless otherwise specified in the contract.
+Dispute Resolution
+Any discrepancies must be reported within 7 days of invoice receipt.
+Disputes are resolved through the Accounts Payable department.
+
+4. Best Practices
+Accuracy
+Always double-check data entries.
+Use automated tools for data validation.
+Efficiency
+Utilize electronic invoicing to reduce manual errors.
+Implement automated approval workflows.
+Compliance
+Ensure all invoices comply with company policies and legal requirements.
+Regularly audit the invoice processing system for compliance.
+
+5. Common Issues and Solutions
+Missing Information
+Solution: Contact the vendor immediately to request the missing details.
+Discrepancies
+Solution: Compare the invoice with the PO and delivery receipt. Resolve any differences with the vendor.
+Late Payments
+Solution: Implement automated reminders to ensure timely payments.
