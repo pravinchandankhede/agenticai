@@ -1,6 +1,7 @@
 ﻿namespace BankServices.Controllers;
 
 using BankServices.BusinessLayer;
+using BankServices.DTO;
 using BankServices.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -64,5 +65,31 @@ public class InvoiceController : ControllerBase
 
         await _InvoiceService.DeleteAsync(id);
         return NoContent();
+    }
+
+    [HttpPost("/validate")]
+    public async Task<ActionResult<Invoice>> Validate(Invoice invoice)
+    {
+        InvoiceDTO invoiceDTO = new InvoiceDTO();
+        invoiceDTO.Invoice = invoice;
+        if (invoice.Amount == 0)
+        {
+            invoiceDTO.Errors.Add("Amount cannot be zero");
+            //return BadRequest("Amount cannot be zero");
+        }
+        if (invoice.CustomerId == 0)
+        {
+            invoiceDTO.Errors.Add("Customer ID cannot be zero");
+            //return BadRequest("Customer ID cannot be zero");
+        }
+
+        if(invoiceDTO.Errors.Count > 0)
+        {
+            return BadRequest(invoiceDTO);
+        }
+
+        return Ok(invoice);
+        //await _InvoiceService.AddAsync(invoice);
+        //return CreatedAtAction(nameof(GetById), new { id = Invoice.InvoiceId }, Invoice);
     }
 }
