@@ -5,6 +5,7 @@ using BankingMAS.AICore.AgentRegistry;
 using BankingMAS.CommonAgent;
 using BankingMAS.Core.ServiceBus;
 using BankingMAS.Core.ServiceBusClient;
+using BankingMAS.RAGEngine;
 using BankingMAS.SharedLibrary;
 using Microsoft.Extensions.Logging;
 using Microsoft.SemanticKernel;
@@ -17,6 +18,8 @@ internal class Program
 
     static async Task Main()
     {
+        await GenerateInvoiceEmbeddings();
+
         var builder = KernelFactory.GetKernelBuilder();
         kernel = builder.Build();
 
@@ -113,4 +116,13 @@ internal class Program
         });
     }
 
+    private static async Task GenerateInvoiceEmbeddings()
+    {
+        IRAGEngine engine = new RAGEngine.Azure.AzureSearchRAGEngine();
+
+        var content = File.ReadAllText(@"C:\GitHub\agenticai\src\BankingMAS\invoice.json");
+
+        await engine.GenerateEmbeddingAsync(content);
+
+    }
 }
