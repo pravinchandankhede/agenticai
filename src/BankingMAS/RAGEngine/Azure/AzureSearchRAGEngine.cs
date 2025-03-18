@@ -20,7 +20,7 @@ public class AzureSearchRAGEngine : IRAGEngine
     {
         var embeddingEngine = kernel.Services.GetRequiredService<EmbeddingEngine>();
 
-        var documentRecords = await SharedLibrary.Helpers.JsonHelpers.GetDocumentRecords(content, "invoice_processing_manual");
+        var documentRecords = await SharedLibrary.Helpers.JsonHelpers.GetDocumentRecords(content, "sections");
 
         foreach (KeyValuePair<String, String> documentRecord in documentRecords)
         {

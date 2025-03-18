@@ -1,179 +1,176 @@
 {
-  "invoice_processing_manual": {
-    "company": "FAST Logistics",
     "sections": [
-      {
-        "section_number": 1,
-        "title": "Introduction",
-        "content": "This manual provides a detailed guide for processing invoices at FAST Logistics. It outlines the step-by-step workflow, validations, and attributes required to ensure efficient and accurate invoice processing. Additionally, it covers how to handle exceptions and raise tickets for issues encountered during the process."
-      },
-      {
-        "section_number": 2,
-        "title": "Invoice Processing Workflow",
-        "subsections": [
-          {
-            "subsection_number": 2.1,
-            "title": "Step 1: Receive the Invoice",
-            "description": "The first step in the invoice processing workflow is to receive the invoice from the vendor.",
-            "process": [
-              "Collect invoices from various channels (email, mail, electronic systems).",
-              "Log the receipt of the invoice in the system."
-            ],
-            "validations": [
-              "Ensure the invoice is from an approved vendor.",
-              "Verify the invoice date is within the acceptable range."
-            ],
-            "attributes": {
-              "invoice_id": "string",
-              "vendor_id": "string",
-              "invoice_date": "date"
-            }
-          },
-          {
-            "subsection_number": 2.2,
-            "title": "Step 2: Validate the Invoice Details",
-            "description": "The second step involves validating the details provided in the invoice.",
-            "process": [
-              "Check that all mandatory fields are completed.",
-              "Verify the accuracy of the invoice details against purchase orders and contracts."
-            ],
-            "validations": [
-              "Ensure all mandatory fields are completed.",
-              "Check for duplicate invoices."
-            ],
-            "attributes": {
-              "invoice_amount": "number",
-              "currency": "string",
-              "line_items": [
+        {
+            "section_number": 1,
+            "title": "Introduction",
+            "content": "This manual provides a detailed guide for processing invoices at FAST Logistics. It outlines the step-by-step workflow, validations, and attributes required to ensure efficient and accurate invoice processing. Additionally, it covers how to handle exceptions and raise tickets for issues encountered during the process."
+        },
+        {
+            "section_number": 2,
+            "title": "Invoice Processing Workflow",
+            "subsections": [
                 {
-                  "item_id": "string",
-                  "description": "string",
-                  "quantity": "number",
-                  "unit_price": "number"
+                    "subsection_number": 2.1,
+                    "title": "Step 1: Receive the Invoice",
+                    "description": "The first step in the invoice processing workflow is to receive the invoice from the vendor.",
+                    "process": [
+                        "Collect invoices from various channels (email, mail, electronic systems).",
+                        "Log the receipt of the invoice in the system."
+                    ],
+                    "validations": [
+                        "Ensure the invoice is from an approved vendor.",
+                        "Verify the invoice date is within the acceptable range."
+                    ],
+                    "attributes": {
+                        "invoice_id": "string",
+                        "vendor_id": "string",
+                        "invoice_date": "date"
+                    }
+                },
+                {
+                    "subsection_number": 2.2,
+                    "title": "Step 2: Validate the Invoice Details",
+                    "description": "The second step involves validating the details provided in the invoice.",
+                    "process": [
+                        "Check that all mandatory fields are completed.",
+                        "Verify the accuracy of the invoice details against purchase orders and contracts."
+                    ],
+                    "validations": [
+                        "Ensure all mandatory fields are completed.",
+                        "Check for duplicate invoices."
+                    ],
+                    "attributes": {
+                        "invoice_amount": "number",
+                        "currency": "string",
+                        "line_items": [
+                            {
+                                "item_id": "string",
+                                "description": "string",
+                                "quantity": "number",
+                                "unit_price": "number"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "subsection_number": 2.3,
+                    "title": "Step 3: Approve the Invoice",
+                    "description": "The third step is to approve the invoice for payment.",
+                    "process": [
+                        "Review the invoice details and ensure they match the purchase order.",
+                        "Obtain necessary approvals from authorized personnel."
+                    ],
+                    "validations": [
+                        "Verify the invoice amount matches the purchase order.",
+                        "Check for proper authorization."
+                    ],
+                    "attributes": {
+                        "approval_status": "string",
+                        "approved_by": "string",
+                        "approval_date": "date"
+                    }
+                },
+                {
+                    "subsection_number": 2.4,
+                    "title": "Step 4: Process the Payment",
+                    "description": "The fourth step is to process the payment for the approved invoice.",
+                    "process": [
+                        "Prepare the payment details and schedule the payment.",
+                        "Execute the payment through the appropriate payment method."
+                    ],
+                    "validations": [
+                        "Ensure payment details are correct.",
+                        "Verify the payment method."
+                    ],
+                    "attributes": {
+                        "payment_id": "string",
+                        "payment_date": "date",
+                        "payment_method": "string"
+                    }
+                },
+                {
+                    "subsection_number": 2.5,
+                    "title": "Step 5: Archive the Invoice",
+                    "description": "The final step is to archive the processed invoice for record-keeping.",
+                    "process": [
+                        "Ensure the invoice is fully processed and all steps are completed.",
+                        "Store the invoice in the designated repository."
+                    ],
+                    "validations": [
+                        "Check if the invoice is fully processed.",
+                        "Ensure the invoice is stored in the correct repository."
+                    ],
+                    "attributes": {
+                        "archive_location": "string",
+                        "archive_date": "date"
+                    }
                 }
-              ]
-            }
-          },
-          {
-            "subsection_number": 2.3,
-            "title": "Step 3: Approve the Invoice",
-            "description": "The third step is to approve the invoice for payment.",
-            "process": [
-              "Review the invoice details and ensure they match the purchase order.",
-              "Obtain necessary approvals from authorized personnel."
-            ],
-            "validations": [
-              "Verify the invoice amount matches the purchase order.",
-              "Check for proper authorization."
-            ],
-            "attributes": {
-              "approval_status": "string",
-              "approved_by": "string",
-              "approval_date": "date"
-            }
-          },
-          {
-            "subsection_number": 2.4,
-            "title": "Step 4: Process the Payment",
-            "description": "The fourth step is to process the payment for the approved invoice.",
-            "process": [
-              "Prepare the payment details and schedule the payment.",
-              "Execute the payment through the appropriate payment method."
-            ],
-            "validations": [
-              "Ensure payment details are correct.",
-              "Verify the payment method."
-            ],
-            "attributes": {
-              "payment_id": "string",
-              "payment_date": "date",
-              "payment_method": "string"
-            }
-          },
-          {
-            "subsection_number": 2.5,
-            "title": "Step 5: Archive the Invoice",
-            "description": "The final step is to archive the processed invoice for record-keeping.",
-            "process": [
-              "Ensure the invoice is fully processed and all steps are completed.",
-              "Store the invoice in the designated repository."
-            ],
-            "validations": [
-              "Check if the invoice is fully processed.",
-              "Ensure the invoice is stored in the correct repository."
-            ],
-            "attributes": {
-              "archive_location": "string",
-              "archive_date": "date"
-            }
-          }
-        ]
-      },
-      {
-        "section_number": 3,
-        "title": "Exceptions and Handling",
-        "content": "This section outlines the common exceptions that may occur during the invoice processing workflow and how to handle them.",
-        "subsections": [
-          {
-            "subsection_number": 3.1,
-            "title": "Common Exceptions",
-            "content": [
-              "Missing Information: If mandatory fields are missing, contact the vendor to provide the necessary information.",
-              "Discrepancies: If there are discrepancies between the invoice and the purchase order, investigate and resolve the issue before proceeding.",
-              "Duplicate Invoices: If a duplicate invoice is detected, verify with the vendor and ensure only one invoice is processed."
             ]
-          },
-          {
-            "subsection_number": 3.2,
-            "title": "Handling Process",
-            "content": [
-              "Identify the exception and log it in the system.",
-              "Take appropriate action to resolve the issue.",
-              "Document the resolution and update the invoice status."
+        },
+        {
+            "section_number": 3,
+            "title": "Exceptions and Handling",
+            "content": "This section outlines the common exceptions that may occur during the invoice processing workflow and how to handle them.",
+            "subsections": [
+                {
+                    "subsection_number": 3.1,
+                    "title": "Common Exceptions",
+                    "content": [
+                        "Missing Information: If mandatory fields are missing, contact the vendor to provide the necessary information.",
+                        "Discrepancies: If there are discrepancies between the invoice and the purchase order, investigate and resolve the issue before proceeding.",
+                        "Duplicate Invoices: If a duplicate invoice is detected, verify with the vendor and ensure only one invoice is processed."
+                    ]
+                },
+                {
+                    "subsection_number": 3.2,
+                    "title": "Handling Process",
+                    "content": [
+                        "Identify the exception and log it in the system.",
+                        "Take appropriate action to resolve the issue.",
+                        "Document the resolution and update the invoice status."
+                    ]
+                }
             ]
-          }
-        ]
-      },
-      {
-        "section_number": 4,
-        "title": "Raising Tickets",
-        "content": "This section explains how to raise tickets for issues encountered during the invoice processing workflow.",
-        "process": [
-          "Identify the issue and gather relevant details.",
-          "Log the issue in the ticketing system with a detailed description.",
-          "Assign the ticket to the appropriate team or personnel for resolution.",
-          "Track the progress of the ticket and ensure timely resolution.",
-          "Update the ticket status and close it once the issue is resolved."
-        ],
-        "attributes": {
-          "ticket_id": "string",
-          "issue_description": "string",
-          "reported_by": "string",
-          "assigned_to": "string",
-          "status": "string",
-          "resolution_date": "date"
+        },
+        {
+            "section_number": 4,
+            "title": "Raising Tickets",
+            "content": "This section explains how to raise tickets for issues encountered during the invoice processing workflow.",
+            "process": [
+                "Identify the issue and gather relevant details.",
+                "Log the issue in the ticketing system with a detailed description.",
+                "Assign the ticket to the appropriate team or personnel for resolution.",
+                "Track the progress of the ticket and ensure timely resolution.",
+                "Update the ticket status and close it once the issue is resolved."
+            ],
+            "attributes": {
+                "ticket_id": "string",
+                "issue_description": "string",
+                "reported_by": "string",
+                "assigned_to": "string",
+                "status": "string",
+                "resolution_date": "date"
+            }
+        },
+        {
+            "section_number": 5,
+            "title": "Validations and Checks",
+            "content": "This section provides a comprehensive list of validations and checks to ensure the accuracy and completeness of the invoice processing workflow.",
+            "validations": [
+                "Vendor Validation: Ensure the invoice is from an approved vendor.",
+                "Date Validation: Verify the invoice date is within the acceptable range.",
+                "Field Validation: Ensure all mandatory fields are completed.",
+                "Duplicate Check: Check for duplicate invoices.",
+                "Amount Validation: Verify the invoice amount matches the purchase order.",
+                "Authorization Check: Ensure proper authorization is obtained for invoice approval.",
+                "Payment Validation: Ensure payment details are correct and the payment method is verified.",
+                "Archival Check: Ensure the invoice is fully processed and stored in the correct repository."
+            ],
+            "checks": [
+                "Consistency Check: Ensure consistency between the invoice, purchase order, and contract details.",
+                "Accuracy Check: Verify the accuracy of the invoice details.",
+                "Completeness Check: Ensure all steps in the workflow are completed."
+            ]
         }
-      },
-      {
-        "section_number": 5,
-        "title": "Validations and Checks",
-        "content": "This section provides a comprehensive list of validations and checks to ensure the accuracy and completeness of the invoice processing workflow.",
-        "validations": [
-          "Vendor Validation: Ensure the invoice is from an approved vendor.",
-          "Date Validation: Verify the invoice date is within the acceptable range.",
-          "Field Validation: Ensure all mandatory fields are completed.",
-          "Duplicate Check: Check for duplicate invoices.",
-          "Amount Validation: Verify the invoice amount matches the purchase order.",
-          "Authorization Check: Ensure proper authorization is obtained for invoice approval.",
-          "Payment Validation: Ensure payment details are correct and the payment method is verified.",
-          "Archival Check: Ensure the invoice is fully processed and stored in the correct repository."
-        ],
-        "checks": [
-          "Consistency Check: Ensure consistency between the invoice, purchase order, and contract details.",
-          "Accuracy Check: Verify the accuracy of the invoice details.",
-          "Completeness Check: Ensure all steps in the workflow are completed."
-        ]
-      }
     ]
-  }
 }

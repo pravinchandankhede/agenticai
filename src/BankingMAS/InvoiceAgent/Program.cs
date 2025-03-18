@@ -18,7 +18,7 @@ internal class Program
 
     static async Task Main()
     {
-        await GenerateInvoiceEmbeddings();
+        //await GenerateInvoiceEmbeddings();
 
         var builder = KernelFactory.GetKernelBuilder();
         kernel = builder.Build();
