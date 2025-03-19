@@ -24,6 +24,7 @@ internal class Program
         kernel = builder.Build();
 
         kernel.ImportPluginFromType<BankingPlugins.InvoicePlugin>();
+        kernel.ImportPluginFromType<BankingPlugins.SearchPlugin>();
 
         var logger = kernel.GetRequiredService<ILogger<Program>>();
 

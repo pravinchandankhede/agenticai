@@ -26,13 +26,16 @@ public class InvoicePlugin
         var invoice = list.FirstOrDefault(m => String.Compare($"{m.Customer.FirstName} {m.Customer.LastName}", name, true) == 0);
         var response = await _InvoiceClient!.ValidateAsync(invoice!);
 
-        if (response != null && response.Errors.Count == 0)
+        if (response != null)
         {
-            response.SuccessMessage = "Validation success";
-        }
-        else
-        {
-            response.SuccessMessage = "Validation failed";
+            if (response.Errors.Count == 0)
+            {
+                response.SuccessMessage = "Validation success";
+            }
+            else
+            {
+                response.SuccessMessage = "Validation failed";
+            }
         }
 
         return response;

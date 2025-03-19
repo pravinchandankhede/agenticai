@@ -13,7 +13,7 @@ using Azure.Search.Documents;
 #pragma warning disable SKEXP0001
 #pragma warning disable SKEXP0020
 
-internal class SearchPlugin(ITextEmbeddingGenerationService _textEmbeddingGenerationService, SearchIndexClient _indexClient)
+public class SearchPlugin(ITextEmbeddingGenerationService _textEmbeddingGenerationService, SearchIndexClient _indexClient)
 {
     [KernelFunction("Search")]
     [Description("Search for a text similar to the given query.")]
@@ -23,7 +23,7 @@ internal class SearchPlugin(ITextEmbeddingGenerationService _textEmbeddingGenera
         var embedding = await _textEmbeddingGenerationService.GenerateEmbeddingAsync(query);
 
         // Get client for search operations
-        var searchClient = _indexClient.GetSearchClient("banking-documentation");
+        var searchClient = _indexClient.GetSearchClient("invoice-documentation");
 
         // Configure request parameters
         VectorizedQuery vectorQuery = new(embedding);

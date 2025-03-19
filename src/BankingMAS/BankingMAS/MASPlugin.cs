@@ -54,7 +54,7 @@ public class MASPlugin
         return $"Sent the application to loan processing agent. application number is {10011101}";
     }
 
-    [KernelFunction, Description("Check and processes the invoice related queries from customers. Coordinates with the invoice agent to ensure smooth invoicing and " +
+    [KernelFunction, Description("Get details on invoice processing flow, exception handling, raising tickets, validation, check and processes the invoice related queries from customers. Coordinates with the invoice agent to ensure smooth invoicing and " +
         "manipulation, validation of invoices")]
     public String ProcessInvoice()
     {
