@@ -56,8 +56,8 @@ public class MASPlugin
 
     [KernelFunction, Description("Get details on invoice processing flow, exception handling, raising tickets, validation, check and processes the invoice related queries from customers. Coordinates with the invoice agent to ensure smooth invoicing and " +
         "manipulation, validation of invoices")]
-    public String ProcessInvoice()
-    {
+    public String ProcessInvoice(Kernel kernel, KernelArguments keyValues, String query)
+    {        
         var agentInfo = AgentRegistry.GetAgent("invoice");
 
         var sender = QueueFactory.GetMessageSender(QueueType.AzureServiceBusQueue);
@@ -76,7 +76,7 @@ public class MASPlugin
             SenderAgentName = "bankingmas",
             UserId = "john doe",
             QueueName = agentInfo.QueueName,
-            Message = $"process invoice for john doe"
+            Message = $"john doe {query}"
         });
 
         return "connecting with invoice agent for these details";

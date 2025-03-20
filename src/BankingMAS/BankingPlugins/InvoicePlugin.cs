@@ -12,19 +12,20 @@ public class InvoicePlugin
         var client = new HttpClient();
         client.BaseAddress = new Uri("https://localhost:7085");
 
-        _InvoiceClient = new InvoiceClient(client);
+        _invoiceClient = new InvoiceClient(client);
     }
 
-    private readonly InvoiceClient? _InvoiceClient = null;
+    private readonly InvoiceClient? _invoiceClient = null;
 
-    [KernelFunction, Description("Validates an invoice if its correct or not")]
+    [KernelFunction("validate_invoice"), 
+        Description("Perform validation of an invoice for a customer, return list of validation errors if any")]
     public async Task<InvoiceDTO> ValidateInvoiceAsync(
         [Description("The customer name of this invoice ")] String name)
     {
-        var list = await _InvoiceClient.GetAllAsync();
+        var list = await _invoiceClient!.GetAllAsync();
         //this should be handle in a better way.
         var invoice = list.FirstOrDefault(m => String.Compare($"{m.Customer.FirstName} {m.Customer.LastName}", name, true) == 0);
-        var response = await _InvoiceClient!.ValidateAsync(invoice!);
+        var response = await _invoiceClient!.ValidateAsync(invoice!);
 
         if (response != null)
         {
@@ -38,7 +39,7 @@ public class InvoicePlugin
             }
         }
 
-        return response;
+        return response!;
     }
 
 }

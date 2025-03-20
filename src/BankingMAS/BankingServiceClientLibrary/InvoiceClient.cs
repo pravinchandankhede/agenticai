@@ -49,7 +49,7 @@ public class InvoiceClient
     public async Task<InvoiceDTO> ValidateAsync(Invoice Invoice)
     {
         var response = await _httpClient.PostAsJsonAsync("/validate", Invoice);
-        response.EnsureSuccessStatusCode();
+        //response.EnsureSuccessStatusCode();
 
         return await response.Content.ReadFromJsonAsync<InvoiceDTO>();
     }
