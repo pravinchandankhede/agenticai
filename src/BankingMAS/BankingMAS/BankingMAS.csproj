@@ -12,10 +12,4 @@
     <PackageReference Include="Microsoft.DependencyValidation.Analyzers" Version="0.11.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\AICore\AICore.csproj" />
-    <ProjectReference Include="..\CommonAgent\CommonAgent.csproj" />
-    <ProjectReference Include="..\Core\Core.csproj" />
-  </ItemGroup>
-
 </Project>

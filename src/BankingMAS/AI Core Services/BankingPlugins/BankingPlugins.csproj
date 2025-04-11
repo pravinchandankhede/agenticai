@@ -8,16 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Azure.Search.Documents" Version="11.6.0" />
     <PackageReference Include="Microsoft.DependencyValidation.Analyzers" Version="0.11.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.3" />
     <PackageReference Include="Microsoft.SemanticKernel" Version="1.41.0" />
-    <PackageReference Include="Microsoft.SemanticKernel.Connectors.AzureAISearch" Version="1.41.0-preview" />
-    <PackageReference Include="Microsoft.SemanticKernel.Connectors.AzureOpenAI" Version="1.41.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AICore\AICore.csproj" />
-    <ProjectReference Include="..\SharedLibrary\SharedLibrary.csproj" />
+    <ProjectReference Include="..\..\Core Services\BankingServiceClientLibrary\BankingServiceClientLibrary.csproj" />
   </ItemGroup>
 
 </Project>

@@ -12,8 +12,4 @@
     <PackageReference Include="Microsoft.SemanticKernel.Connectors.AzureAISearch" Version="1.41.0-preview" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\CommonAgent\CommonAgent.csproj" />
-  </ItemGroup>
-
 </Project>

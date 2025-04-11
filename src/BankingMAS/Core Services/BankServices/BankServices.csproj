@@ -13,4 +13,8 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="7.3.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BankingServiceModels\BankingServiceModels.csproj" />
+  </ItemGroup>
+
 </Project>
