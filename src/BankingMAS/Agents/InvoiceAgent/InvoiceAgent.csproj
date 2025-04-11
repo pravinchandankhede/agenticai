@@ -13,10 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BankingPlugins\BankingPlugins.csproj" />
-    <ProjectReference Include="..\CommonAgent\CommonAgent.csproj" />
-    <ProjectReference Include="..\Core\Core.csproj" />
-    <ProjectReference Include="..\RAGEngine\RAGEngine.csproj" />
+    <ProjectReference Include="..\..\AI Core Services\BankingPlugins\BankingPlugins.csproj" />
+    <ProjectReference Include="..\..\AI Core Services\CommonAgent\CommonAgent.csproj" />
+    <ProjectReference Include="..\..\AI Core Services\RAGEngine\RAGEngine.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Core\Core.csproj" />
   </ItemGroup>
 
 </Project>
