@@ -6,3 +6,4 @@
 **/bin
 **/obj
 /src/CustomerService/BankingAgent/BankingAgent.csproj.user
+/src/BankingMAS/BankingMAS.slnLaunch.user
