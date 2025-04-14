@@ -29,7 +29,7 @@ public class AccountController : ControllerBase
         var account = await _accountService.GetByIdAsync(id);
         if (account == null)
         {
-            return NotFound();
+            return NotFound($"account with id {id} not found");
         }
         return account;
     }
