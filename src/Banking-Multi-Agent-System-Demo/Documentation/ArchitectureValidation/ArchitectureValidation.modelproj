@@ -33,10 +33,6 @@
       <Name>ApprovalAgent</Name>
       <Project>{c20f4b1f-8208-4552-baf6-7a81cbd24673}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\BankingMAS\BankingMAS.csproj">
-      <Name>BankingMAS</Name>
-      <Project>{0b154f2f-2c7a-4dfe-a660-8e7435db47f5}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\BankingPlugins\BankingPlugins.csproj">
       <Name>BankingPlugins</Name>
       <Project>{f22dcff1-7fa2-4e34-b364-0aa23fd7cc94}</Project>

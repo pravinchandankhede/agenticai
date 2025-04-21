@@ -1,0 +1,23 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "BankingMAS\\BankingMAS.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "Agents\\AccountingAgent\\AccountingAgent.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "Agents\\InvoiceAgent\\InvoiceAgent.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "Core Services\\BankServices\\BankServices.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]
