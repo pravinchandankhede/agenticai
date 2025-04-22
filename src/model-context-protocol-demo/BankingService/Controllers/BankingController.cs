@@ -24,4 +24,10 @@ public class BankingController : ControllerBase
 
 		return NotFound(new { Message = $"Account '{accountName}' not found." });
 	}
+
+	[HttpGet("balance")]
+	public IActionResult GetBalances()
+	{
+		return Ok(AccountBalances);
+	}
 }
