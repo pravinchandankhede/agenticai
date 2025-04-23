@@ -1,5 +1,6 @@
 ﻿namespace MCPServer.Tools;
 
+using MCPServer.Utilities;
 using ModelContextProtocol.Server;
 using System.ComponentModel;
 using System.Text.Json;
