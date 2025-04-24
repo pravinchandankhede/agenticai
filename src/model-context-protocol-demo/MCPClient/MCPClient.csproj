@@ -7,7 +7,7 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
+  <ItemGroup>    
     <PackageReference Include="ModelContextProtocol" Version="0.1.0-preview.10" />
   </ItemGroup>
 
