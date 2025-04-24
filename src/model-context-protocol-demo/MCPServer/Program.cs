@@ -11,14 +11,13 @@ internal class Program
 	{
 		var builder = WebApplication.CreateBuilder(args);
 		builder.Logging.AddConsole(consoleLogOptions =>
-		{
-			// Configure all logs to go to stderr
+		{			
 			consoleLogOptions.LogToStandardErrorThreshold = LogLevel.Error;
 		});
 		builder.Services
 			.AddMcpServer()
 			.WithHttpTransport()
-			.WithStdioServerTransport()
+			//.WithStdioServerTransport()
 			.WithToolsFromAssembly();
 		builder.Services.AddHttpClient();
 		builder.Services.AddSingleton<BankingServiceClient>();
