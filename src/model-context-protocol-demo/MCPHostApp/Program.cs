@@ -1,6 +1,8 @@
-﻿public class Program
+﻿using System.Net.Http;
+
+public class Program
 {
-	public static void Main()
+	public static async Task Main()
 	{
 		String baseUrl = @"http://localhost:5000";
 
@@ -31,7 +33,7 @@
 
 			try
 			{
-				private const string eventStreamUrl = "https://your-mcp-server.com/api/tools-stream"; // Update this with the actual endpoint 
+				const string eventStreamUrl = "http://localhost:5000/sse"; // Update this with the actual endpoint 
 
 				var request = new HttpRequestMessage(HttpMethod.Get, eventStreamUrl);
 				request.Headers.Add("Accept", "text/event-stream");
@@ -42,42 +44,38 @@
 					var stream = await response.Content.ReadAsStreamAsync();
 
 					using (var reader = new System.IO.StreamReader(stream))
-{
-	Console.WriteLine("Listening for tool updates...");
+					{
+						Console.WriteLine("Listening for tool updates...");
 
-	while (!reader.EndOfStream)
-	{
-		var line = await reader.ReadLineAsync();
-		if (!string.IsNullOrEmpty(line) && line.StartsWith("data: "))
-		{
-			Console.WriteLine($"New tool update received: {line.Substring(6)}");
-		}
-	}
-}
+						while (!reader.EndOfStream)
+						{
+							var line = await reader.ReadLineAsync();
+							if (!string.IsNullOrEmpty(line) && line.StartsWith("data: "))
+							{
+								Console.WriteLine($"New tool update received: {line.Substring(6)}");
+							}
+						}
 					}
-					}
-					
-				
+				}
 			}
-		
-					catch (HttpRequestException httpRequestException)
-	{
+			catch (HttpRequestException httpRequestException)
+			{
 
-	}
+			}
 
+			Console.WriteLine("Hello, World!");
+			//McpClientFactory.CreateAsync(
+			//   clientTransport: new StdioClientTransport(new StdioClientTransportOptions
+			//   {
+			//	   Name = "MCPServer",
+			//	   Command = GetMCPServerPath(), // Path to the MCPServer executable
+			//   }),
+		}
 
-
-		Console.WriteLine("Hello, World!");
-		//McpClientFactory.CreateAsync(
-		//   clientTransport: new StdioClientTransport(new StdioClientTransportOptions
-		//   {
-		//	   Name = "MCPServer",
-		//	   Command = GetMCPServerPath(), // Path to the MCPServer executable
-		//   }),
 	}
 
 	public static void Main1()
-{
+	{
 
-}
+	}
 }

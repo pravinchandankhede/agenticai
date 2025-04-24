@@ -13,21 +13,20 @@ internal class Program
 		builder.Logging.AddConsole(consoleLogOptions =>
 		{
 			// Configure all logs to go to stderr
-			consoleLogOptions.LogToStandardErrorThreshold = LogLevel.Trace;
+			consoleLogOptions.LogToStandardErrorThreshold = LogLevel.Error;
 		});
 		builder.Services
 			.AddMcpServer()
 			.WithHttpTransport()
-			//.WithStdioServerTransport()
+			.WithStdioServerTransport()
 			.WithToolsFromAssembly();
+		builder.Services.AddHttpClient();
 		builder.Services.AddSingleton<BankingServiceClient>();
 
 		var app = builder.Build();
 
-		app.MapMcp("api/tools");
-		//app.MapMcp();
+		app.MapMcp();
 
-		//app.Run("http://localhost:5000");
 		app.Run();
 	}
 }

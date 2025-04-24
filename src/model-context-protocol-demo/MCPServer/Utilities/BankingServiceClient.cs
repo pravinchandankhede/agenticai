@@ -4,14 +4,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 public class BankingServiceClient
 {
 	private readonly HttpClient httpClient;
-	public BankingServiceClient(IHttpClientFactory httpClientFactory)
+	
+	public BankingServiceClient(HttpClient httpClient)
 	{
-		httpClient = httpClientFactory.CreateClient();
+		this.httpClient = httpClient;
 	}
 
 	List<Balance> bankingList = new();
@@ -24,7 +26,8 @@ public class BankingServiceClient
 
 		if (response.IsSuccessStatusCode)
 		{
-			bankingList = JsonSerializer.Deserialize<List<Balance>>(await response.Content.ReadAsStringAsync()!)!;
+			var json = await response.Content.ReadAsStringAsync();
+			bankingList = JsonSerializer.Deserialize<List<Balance>>(json)!;
 		}
 
 		bankingList ??= [];
@@ -40,7 +43,15 @@ public class BankingServiceClient
 
 	public partial class Balance
 	{
+		public Balance(String name, Decimal amount)
+		{
+			Name = name;
+			Amount = amount;
+		}
+
+		[JsonPropertyName("name")]
 		public string? Name { get; set; }
-		public double Amount { get; set; }
+		[JsonPropertyName("amount")]
+		public decimal Amount { get; set; }
 	}
 }

@@ -1,5 +1,6 @@
 ﻿namespace BankingService.Controllers;
 
+using BankingService.Models;
 using Microsoft.AspNetCore.Mvc;
 
 [Route("api/[controller]")]
@@ -7,19 +8,21 @@ using Microsoft.AspNetCore.Mvc;
 public class BankingController : ControllerBase
 {
 	// Placeholder for account data (replace with actual service or repository)
-	private static readonly Dictionary<string, decimal> AccountBalances = new()
+	private static readonly List<Balance> AccountBalances = new()
 	{
-		{ "JohnDoe", 1500.75m },
-		{ "JaneSmith", 2450.00m },
-		{ "AliceBrown", 320.50m }
+		new Balance("JohnDoe", 1500.75m ),
+		new Balance( "JaneSmith", 2450.00m ),
+		new Balance( "AliceBrown", 320.50m )
 	};
 
 	[HttpGet("balance/{accountName}")]
 	public IActionResult GetBalance(string accountName)
 	{
-		if (AccountBalances.TryGetValue(accountName, out var balance))
+		var balance = AccountBalances.FirstOrDefault(b => b.Name?.Equals(accountName, StringComparison.OrdinalIgnoreCase) == true);
+
+		if(balance != null)
 		{
-			return Ok(new { AccountName = accountName, Balance = balance });
+			return Ok(balance);
 		}
 
 		return NotFound(new { Message = $"Account '{accountName}' not found." });
