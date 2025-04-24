@@ -14,4 +14,7 @@ This is  simple banking service which provides 2 operations
 *Note*: For simplicity the banking service implements a in memory list of names and amount.
 
 ## Banking MCP Server
-This is a MCP server exposed for the banking service. It demostrates how to implement a MCP server for you organizations APIs.
+This is a MCP server exposed for the banking service. It demonstrates how to implement a MCP server for your organizations APIs. This project how you can build a MCP server around your APIs and then expose them using a ASP.NET Core runtime making it available over a endpoint. This endpoint can then be utilized by a client to list down all the tools available with MCP server.
+
+
+
