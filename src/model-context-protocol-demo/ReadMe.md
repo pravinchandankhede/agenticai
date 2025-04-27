@@ -165,4 +165,4 @@ Tool result: [{"name":"JohnDoe","amount":1500.75},{"name":"JaneSmith","amount":2
 ```
 
 ## Conclusion
-My objective was to demonstrate the model context protocol at a very basic level without considering the complexity of LLMs and other tools. In later post, I will demonstrate how to integrate with LLM and AI Agents.
+My objective was to demonstrate the model context protocol at a very basic level without considering the complexity of LLMs and other tools. In later code samples, I will demonstrate how to integrate with LLM and AI Agents.
