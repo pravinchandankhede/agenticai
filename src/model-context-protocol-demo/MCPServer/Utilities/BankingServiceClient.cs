@@ -7,16 +7,23 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
+/// <summary>
+/// Client to call the Banking service.
+/// </summary>
 public class BankingServiceClient
 {
 	private readonly HttpClient httpClient;
-	
+	private List<Balance> bankingList = new();
+
 	public BankingServiceClient(HttpClient httpClient)
 	{
 		this.httpClient = httpClient;
 	}
 
-	List<Balance> bankingList = new();
+	/// <summary>
+	/// Get a list of accounts and balance.
+	/// </summary>
+	/// <returns>list of balances</returns>
 	public async Task<List<Balance>> GetBalances()
 	{
 		if (bankingList?.Count > 0)
@@ -35,12 +42,20 @@ public class BankingServiceClient
 		return bankingList;
 	}
 
+	/// <summary>
+	/// Get a balance by name.
+	/// </summary>
+	/// <param name="name">name of account</param>
+	/// <returns>balance for the given account</returns>
 	public async Task<Balance?> GetBalance(string name)
 	{
 		var bankings = await GetBalances();
 		return bankings.FirstOrDefault(m => m.Name?.Equals(name, StringComparison.OrdinalIgnoreCase) == true);
 	}
 
+	/// <summary>
+	/// Balance object to hold account name and balance.
+	/// </summary>
 	public partial class Balance
 	{
 		public Balance(String name, Decimal amount)
