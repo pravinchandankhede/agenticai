@@ -10,6 +10,7 @@ using System.ClientModel;
 internal class Program
 {
 	private static IMcpClient _client;
+	private static IList<McpClientTool> _mcpClientTools = new List<McpClientTool>();
 
 	static async Task Main()
 	{
@@ -28,36 +29,29 @@ internal class Program
 
 		List<ChatMessage> conversationMessages =
 		[
-			// System messages represent instructions or other guidance about how the assistant should behave
 			new SystemChatMessage("You are a helpful assistant that tells about the banking process and accounts information. You can integrationwith lot of tools and systems to gather the required info."),
-			// User messages represent user input, whether historical or the most recent input
-			new UserChatMessage("Hi, can you help me with balance for JohnDoe?"),
-			//// Assistant messages in a request represent conversation history for responses
-			//new AssistantChatMessage("Arrr! Of course, me hearty! What can I do for ye?"),
-			//new UserChatMessage("What's the best way to train a parrot?"),
+			new UserChatMessage("can you help me with balances for JohnDoe?"),
 		];
 		ChatCompletion completion = chatClient.CompleteChat(conversationMessages, options);
 
-		while( completion.FinishReason != ChatFinishReason.Stop)
+		while (completion.FinishReason != ChatFinishReason.Stop)
 		{
+			if (completion.FinishReason == ChatFinishReason.ToolCalls)
+			{
+				// Add a new assistant message to the conversation history that includes the tool calls
+				conversationMessages.Add(new AssistantChatMessage(completion));
+
+				foreach (ChatToolCall toolCall in completion.ToolCalls)
+				{
+					conversationMessages.Add(new ToolChatMessage(toolCall.Id, 
+						await HandleToolExecutionAsync(_mcpClientTools, toolCall.FunctionName, null)));
+				}				
+			}
+
 			completion = chatClient.CompleteChat(conversationMessages, options);
 		}
 
 		Console.WriteLine($"{completion.Role}: {completion.Content[0].Text}");
-
-		if (completion.FinishReason == ChatFinishReason.ToolCalls)
-		{
-			// Add a new assistant message to the conversation history that includes the tool calls
-			conversationMessages.Add(new AssistantChatMessage(completion));
-
-			foreach (ChatToolCall toolCall in completion.ToolCalls)
-			{
-				conversationMessages.Add(new ToolChatMessage(toolCall.Id, GetToolCallContent(toolCall)));
-			}
-
-			// Now make a new request with all the messages thus far, including the original
-		}
-
 	}
 
 	private static async Task<IList<McpClientTool>> GetTools()
@@ -78,34 +72,43 @@ internal class Program
 			Console.WriteLine();
 		}
 
-		return await _client.ListToolsAsync();
+		_mcpClientTools = await _client.ListToolsAsync();
+		return _mcpClientTools;
 	}
 
-	private static async Task HandleToolExecution(IList<McpClientTool> tools, string toolName, IReadOnlyDictionary<String, Object> parameters)
+	private static async Task<String> HandleToolExecutionAsync(IList<McpClientTool> tools, string toolName, IReadOnlyDictionary<String, Object> parameters)
 	{
+		String response = String.Empty;
+
 		// Find the tool by name
 		var tool = tools.FirstOrDefault(t => t.Name == toolName);
 		if (tool == null)
 		{
+			response = $"Tool '{toolName}' not found.";
 			Console.WriteLine($"Tool '{toolName}' not found.");
-			return;
+			return response;
 		}
 
 		// Execute the tool
 		Console.WriteLine($"Executing tool: {tool.Name} with parameters: {parameters}");
+
 		await _client.CallToolAsync(tool.Name, parameters)
 			.ContinueWith(t =>
 			{
 				if (t.IsCompletedSuccessfully)
 				{
+					response = t.Result.Content.First().Text;
 					Console.WriteLine($"Tool result: {t.Result.Content.First().Text}");
 				}
 				else
 				{
+					response = t.Exception?.Message;
 					Console.WriteLine($"Error: {t.Exception?.Message}");
 				}
 			});
 		//var result = await tool..ExecuteAsync(parameters);
 		//Console.WriteLine($"Result: {result}");
+
+		return response;
 	}
 }
