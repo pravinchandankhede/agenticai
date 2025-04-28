@@ -89,7 +89,6 @@ internal class Program
 			return response;
 		}
 
-		// Execute the tool
 		Console.WriteLine($"Executing tool: {tool.Name} with parameters: {parameters}");
 
 		await _client.CallToolAsync(tool.Name, parameters)
@@ -106,8 +105,6 @@ internal class Program
 					Console.WriteLine($"Error: {t.Exception?.Message}");
 				}
 			});
-		//var result = await tool..ExecuteAsync(parameters);
-		//Console.WriteLine($"Result: {result}");
 
 		return response;
 	}
