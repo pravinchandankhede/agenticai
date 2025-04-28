@@ -3,7 +3,6 @@
 using Azure.AI.OpenAI;
 using ModelContextProtocol.Client;
 using ModelContextProtocol.Protocol.Transport;
-using ModelContextProtocol.Protocol.Types;
 using OpenAI.Chat;
 using SharedLibrary;
 using System.ClientModel;
@@ -15,43 +14,50 @@ internal class Program
 	static async Task Main()
 	{
 		AzureOpenAIClient azureClient = new(
-			new Uri(AppSetting.Endpoint), 
+			new Uri(AppSetting.Endpoint),
 			new ApiKeyCredential(AppSetting.Key));
 		ChatClient chatClient = azureClient.GetChatClient(AppSetting.DeploymentName);
 		var tools = await GetTools();
 
 		ChatCompletionOptions options = new();
-		
+
 		foreach (var tool in tools)
 		{
-			options.Tools.Add( ChatTool.CreateFunctionTool(
-				 tool.Name, tool.Description, async (parameters) =>
-			{
-				// Call HandleToolExecution when the tool is invoked
-				await HandleToolExecution(tools, tool.Name, parameters);
-				return "Tool execution completed.";
-			}));			
+			options.Tools.Add(ChatTool.CreateFunctionTool(tool.Name, tool.Description));
 		}
-		
-		ChatCompletion completion = chatClient.CompleteChat(
+
+		List<ChatMessage> conversationMessages =
 		[
 			// System messages represent instructions or other guidance about how the assistant should behave
-			new SystemChatMessage("You are a helpful assistant that tells about the banking process and accounts information. You can integration with lot of tools and systems to gather the required info."),
+			new SystemChatMessage("You are a helpful assistant that tells about the banking process and accounts information. You can integrationwith lot of tools and systems to gather the required info."),
 			// User messages represent user input, whether historical or the most recent input
 			new UserChatMessage("Hi, can you help me with balance for JohnDoe?"),
 			//// Assistant messages in a request represent conversation history for responses
 			//new AssistantChatMessage("Arrr! Of course, me hearty! What can I do for ye?"),
 			//new UserChatMessage("What's the best way to train a parrot?"),
-		]);
+		];
+		ChatCompletion completion = chatClient.CompleteChat(conversationMessages, options);
+
+		while( completion.FinishReason != ChatFinishReason.Stop)
+		{
+			completion = chatClient.CompleteChat(conversationMessages, options);
+		}
 
 		Console.WriteLine($"{completion.Role}: {completion.Content[0].Text}");
 
-		Console.WriteLine("Hello, World!");
+		if (completion.FinishReason == ChatFinishReason.ToolCalls)
+		{
+			// Add a new assistant message to the conversation history that includes the tool calls
+			conversationMessages.Add(new AssistantChatMessage(completion));
 
-		
-		
-		
-		
+			foreach (ChatToolCall toolCall in completion.ToolCalls)
+			{
+				conversationMessages.Add(new ToolChatMessage(toolCall.Id, GetToolCallContent(toolCall)));
+			}
+
+			// Now make a new request with all the messages thus far, including the original
+		}
+
 	}
 
 	private static async Task<IList<McpClientTool>> GetTools()
@@ -75,7 +81,7 @@ internal class Program
 		return await _client.ListToolsAsync();
 	}
 
-	private static async Task HandleToolExecution(IList<McpClientTool> tools, string toolName, IReadOnlyDictionary<String,Object> parameters)
+	private static async Task HandleToolExecution(IList<McpClientTool> tools, string toolName, IReadOnlyDictionary<String, Object> parameters)
 	{
 		// Find the tool by name
 		var tool = tools.FirstOrDefault(t => t.Name == toolName);
