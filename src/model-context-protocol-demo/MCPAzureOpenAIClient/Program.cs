@@ -6,6 +6,7 @@ using ModelContextProtocol.Protocol.Transport;
 using OpenAI.Chat;
 using SharedLibrary;
 using System.ClientModel;
+using System.Text.Json;
 
 internal class Program
 {
@@ -44,7 +45,7 @@ internal class Program
 				foreach (ChatToolCall toolCall in completion.ToolCalls)
 				{
 					conversationMessages.Add(new ToolChatMessage(toolCall.Id, 
-						await HandleToolExecutionAsync(_mcpClientTools, toolCall.FunctionName, null)));
+						await HandleToolExecutionAsync(toolCall.FunctionName, GetParameters(toolCall.FunctionArguments))));
 				}				
 			}
 
@@ -76,22 +77,13 @@ internal class Program
 		return _mcpClientTools;
 	}
 
-	private static async Task<String> HandleToolExecutionAsync(IList<McpClientTool> tools, string toolName, IReadOnlyDictionary<String, Object> parameters)
+	private static async Task<String> HandleToolExecutionAsync(String toolName, IReadOnlyDictionary<String, Object> parameters)
 	{
 		String response = String.Empty;
 
-		// Find the tool by name
-		var tool = tools.FirstOrDefault(t => t.Name == toolName);
-		if (tool == null)
-		{
-			response = $"Tool '{toolName}' not found.";
-			Console.WriteLine($"Tool '{toolName}' not found.");
-			return response;
-		}
+		Console.WriteLine($"Executing tool: {toolName} with parameters: {parameters}");
 
-		Console.WriteLine($"Executing tool: {tool.Name} with parameters: {parameters}");
-
-		await _client.CallToolAsync(tool.Name, parameters)
+		await _client.CallToolAsync(toolName, parameters)
 			.ContinueWith(t =>
 			{
 				if (t.IsCompletedSuccessfully)
@@ -107,5 +99,19 @@ internal class Program
 			});
 
 		return response;
+	}
+
+	private static IReadOnlyDictionary<String, Object> GetParameters(BinaryData functionArguments)
+	{
+		var dictionary = new Dictionary<String, Object>();
+		using JsonDocument argumentsDocument = JsonDocument.Parse(functionArguments);
+
+		foreach (JsonProperty property in argumentsDocument.RootElement.EnumerateObject())
+		{
+			Console.WriteLine($"Key: {property.Name}, Value: {property.Value}");
+			dictionary[property.Name] = property.Value.ToString();
+		}
+
+		return dictionary;
 	}
 }
