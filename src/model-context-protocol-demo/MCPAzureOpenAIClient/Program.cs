@@ -15,19 +15,26 @@ internal class Program
 
 	static async Task Main()
 	{
+		// create a new Azure OpenAI client
 		AzureOpenAIClient azureClient = new(
 			new Uri(AppSetting.Endpoint),
 			new ApiKeyCredential(AppSetting.Key));
+
+		// create a new chat client
 		ChatClient chatClient = azureClient.GetChatClient(AppSetting.DeploymentName);
+
+		//Get the tools from the MCP server
 		var tools = await GetTools();
 
 		ChatCompletionOptions options = new();
 
+		//Add each tool to ChatCompletionOptions
 		foreach (var tool in tools)
 		{
 			options.Tools.Add(ChatTool.CreateFunctionTool(tool.Name, tool.Description));
 		}
 
+		//Simulate a conversation with the assistant
 		List<ChatMessage> conversationMessages =
 		[
 			new SystemChatMessage("You are a helpful assistant that tells about the banking process and accounts information. You can integration with lot of tools and systems to gather the required info."),
@@ -35,6 +42,7 @@ internal class Program
 		];
 		ChatCompletion completion = chatClient.CompleteChat(conversationMessages, options);
 
+		//Core: Unless the assistant is done, keep calling tools and call the assistant again.
 		while (completion.FinishReason != ChatFinishReason.Stop)
 		{
 			if (completion.FinishReason == ChatFinishReason.ToolCalls)
@@ -44,17 +52,23 @@ internal class Program
 
 				foreach (ChatToolCall toolCall in completion.ToolCalls)
 				{
+					//Handle the tool call and add the result to the conversation history
 					conversationMessages.Add(new ToolChatMessage(toolCall.Id, 
 						await HandleToolExecutionAsync(toolCall.FunctionName, GetParameters(toolCall.FunctionArguments))));
 				}				
 			}
 
+			//Call the LLM and see if got the final answer
 			completion = chatClient.CompleteChat(conversationMessages, options);
 		}
 
 		Console.WriteLine($"{completion.Role}: {completion.Content[0].Text}");
 	}
 
+	/// <summary>
+	/// Gets the list of tools from server
+	/// </summary>
+	/// <returns>list of tools</returns>
 	private static async Task<IList<McpClientTool>> GetTools()
 	{
 		// Read this endpoint from a config file.
@@ -77,6 +91,12 @@ internal class Program
 		return _mcpClientTools;
 	}
 
+	/// <summary>
+	/// Handles the tool execution
+	/// </summary>
+	/// <param name="toolName">tool to be called</param>
+	/// <param name="parameters">tool parameters</param>
+	/// <returns>result of tool call</returns>
 	private static async Task<String> HandleToolExecutionAsync(String toolName, IReadOnlyDictionary<String, Object> parameters)
 	{
 		String response = String.Empty;
@@ -101,6 +121,11 @@ internal class Program
 		return response;
 	}
 
+	/// <summary>
+	/// Utilty method to get the parameters from the function arguments
+	/// </summary>
+	/// <param name="functionArguments"></param>
+	/// <returns></returns>
 	private static IReadOnlyDictionary<String, Object> GetParameters(BinaryData functionArguments)
 	{
 		var dictionary = new Dictionary<String, Object>();
