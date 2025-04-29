@@ -30,7 +30,7 @@ internal class Program
 
 		List<ChatMessage> conversationMessages =
 		[
-			new SystemChatMessage("You are a helpful assistant that tells about the banking process and accounts information. You can integrationwith lot of tools and systems to gather the required info."),
+			new SystemChatMessage("You are a helpful assistant that tells about the banking process and accounts information. You can integration with lot of tools and systems to gather the required info."),
 			new UserChatMessage("can you help me with balances for JohnDoe?"),
 		];
 		ChatCompletion completion = chatClient.CompleteChat(conversationMessages, options);
@@ -83,7 +83,7 @@ internal class Program
 
 		Console.WriteLine($"Executing tool: {toolName} with parameters: {parameters}");
 
-		await _client.CallToolAsync(toolName, parameters)
+		await _client.CallToolAsync(toolName, parameters!)
 			.ContinueWith(t =>
 			{
 				if (t.IsCompletedSuccessfully)
