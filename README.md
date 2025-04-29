@@ -1,3 +1,16 @@
+# Table of Contents
+
+1. [Agentic AI Samples](#agentic-ai-samples)
+2. [Semantic Kernel](#semantic-kernel)
+   - [Code](https://github.com/pravinchandankhede/agenticai/tree/main/src/SemanticKernel)
+3. [Banking MAS](#banking-mas)
+   - [Code](https://github.com/pravinchandankhede/agenticai/tree/main/src/Banking-Multi-Agent-System-Demo)
+4. [Model Context Protocol](#model-context-protocol)
+   - **Basic Protocol Working Sample**
+     - [Code](https://github.com/pravinchandankhede/agenticai/tree/main/src/model-context-protocol-demo)
+   - **Basic Client with Azure OpenAI Chat Completion Integration**
+     - [Code](https://github.com/pravinchandankhede/agenticai/tree/main/src/model-context-protocol-demo/MCPAzureOpenAIClient)
+
 # Agentic AI Samples
 This repo contains demo samples on variety of topics using languages like C#, Typescript, Angular, XML, JSON
 
