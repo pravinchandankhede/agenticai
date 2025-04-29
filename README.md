@@ -17,4 +17,4 @@ In this demo, I have created a Banking service and the operations are exposed as
 
 ### Basic client that uses Azure OpenAI ChatCompletion classes and consumes Tools exposed using MCP library.
 This demo shows how to create a .NET Console client that provides an MCP tool integration with Azure OpenAI model using ChatCompletion APIs. This server is hosted using ASP.NET Core setup. The MCP server is then accessed through a .NET Console Client that uses ModelContextProtocol and Azure OpenAI nuget library. This client lists down all the tools available with server and then uses a Tool calling feature of LLM.
-[Code](https://github.com/pravinchandankhede/agenticai/tree/main/src/model-context-protocol-demo)
+[Code](https://github.com/pravinchandankhede/agenticai/tree/main/src/model-context-protocol-demo/MCPAzureOpenAIClient).
