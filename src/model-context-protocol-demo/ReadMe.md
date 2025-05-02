@@ -3,22 +3,31 @@ This contains the outline and description of design for this demo application.
 # Table of Contents
 1. [Model Context Protocol](#model-context-protocol)
 2. [Banking Service](#banking-service)
+   - [Get Balances](#get-balances)
+   - [Get Balance](#get-balance)
 3. [Banking MCP Server](#banking-mcp-server)
    - [MCP Server Setup](#mcp-server-setup)
    - [Tool Setup](#tool-setup)
-4. [Basic MCP Client](#mcp-client)
+4. [Basic MCP Client](#basic-mcp-client)
    - [MCP Client Setup](#mcp-client-setup)
    - [Tool Discovery](#tool-discovery)
    - [Tool Invocation](#tool-invocation)
    - [Run](#run)
 5. [MCP Client using Azure OpenAI Nuget & LLM Integration](#mcp-client-using-azure-openai-nuget--llm-integration)
-   - [Create an Azure Client](#create-an-azure-client)
-   - [Create an MCP Client](#create-an-mcp-client)
+   - [Create a Azure Client](#create-a-azure-client)
+   - [Create a MCP Client](#create-a-mcp-client)
    - [Set the MCP Tools for AzureOpenAIClientOptions](#set-the-mcp-tools-for-azureopenaiclientoptions)
    - [Azure OpenAI LLM Call](#azure-openai-llm-call)
    - [Tool Invocation](#tool-invocation-1)
    - [Run](#run-1)
-6. [Conclusion](#conclusion)
+6. [Semantic Kernel based client with MCP Client Tools and Azure OpenAI LLM Integration](#semantic-kernel-based-client-with-mcp-client-tools-and-azure-openai-llm-integration)
+   - [Installing Semantic Kernel and Other needed NuGets](#installing-semantic-kernel-and-other-needed-nugets)
+   - [Create a Semantic Kernel Client](#create-a-semantic-kernel-client)
+   - [Create a MCP Client](#create-a-mcp-client-1)
+   - [Setup the MCP Tools with Semantic Kernel](#setup-the-mcp-tools-with-semantic-kernel)
+   - [Call the LLM with User Query](#call-the-llm-with-user-query)
+   - [Run](#run-2)
+7. [Conclusion](#conclusion)
 
 
 # Model Context Protocol
@@ -277,6 +286,113 @@ Tool result: {"name":"JohnDoe","amount":1500.75}
 Assistant: The balance for account "JohnDoe" is $1500.75.
 ```
 ## Semantic Kernel based client with MCP Client Tools and Azure OpenAI LLM Integration
+This client demonstrate how to integrate the MCP tools with Semantic Kernel based client. The client uses the `McpClient` class to connect to the MCP server and list down all the tools available with it. The client then uses the `SemanticKernel` class to create a kernel instance and add the MCP tools to the Plugins collection. The kernel is then used to call the LLM using the tools. Lets see the steps to implement this.
+
+### Installing Semantic Kernel and Other needed NuGets
+Create a .NET Console application and install below Nuget Packages to it. You can choose to use the Visual Studio or .NET CLI to install the packages.
+```bash
+dotnet add package Microsoft.SemanticKernel
+dotnet add package Microsoft.SemanticKernel.Connectors.AI.OpenAI
+dotnet add package ModelContextProtocol
+dotnet add package Microsoft.Extensions.Logging.Console
+```
+
+### Create a Semantic Kernel Client
+Use the below code to create an instance of `KernelBuilder` instance. This will be used to create an instance of Kernel later. The code also configures the Azure OpenAI LLM endpoint for `ChatCompletion` and provides logging support for it.
+```csharp
+var builder = Kernel.CreateBuilder();
+
+builder.AddAzureOpenAIChatCompletion(
+	AppSetting.DeploymentName,
+	AppSetting.Endpoint,
+	AppSetting.Key);
+
+builder.Services.AddLogging(loggingBuilder =>
+{
+	loggingBuilder.AddConsole();
+	loggingBuilder.SetMinimumLevel(LogLevel.Information);
+});
+
+return builder;
+```
+
+### Create a MCP Client
+We will then configure the MCP Client to get the list of tools supported by the MCP client. This code is mostly same as used in my above demo
+
+```csharp
+public static async Task<IList<McpClientTool>> GetMcpTools()
+{
+	// Read this endpoint from a config file.
+	var endpoint = "http://localhost:5000/sse";
+
+	// Create a new SseClientTransport with the endpoint.
+	var sseClientTransport = new SseClientTransport(new SseClientTransportOptions { Endpoint = new ri(endpoint) });
+	// Create a new McpClient using the SseClientTransport.
+	var client = await McpClientFactory.CreateAsync(clientTransport: sseClientTransport);
+
+	return await client.ListToolsAsync();
+}
+```
+
+### Setup the MCP Tools with Semantic Kernel
+Next we will configure the tools with the `KernelBuilder` instance. The code first gets the `Kernel` instance and then the list of `McpClientTools`. These are then added to the `Plugins` collection of SemanticKernel. Here we use helper method which performs the job of transformation tools into plugins. 
+
+```csharp
+var kernel = GetKernelBuilder().Build();
+var tools = GetMcpTools().GetAwaiter().GetResult();
+
+kernel.Plugins.AddFromFunctions("Banking", tools.Select(tool => tool.AsKernelFunction()));
+```
+
+### Call the LLM with User Query
+Now we will simulate a user query to LLM and see if the `Kernel` is able to call the MCP tools. The code gives a hard coded prompt to the LLM and then calls the `GetBalance` tool. The tool call is internally by `Kernel` itself as we have set the `FunctionCallBehaviour` property to Auto. We have also configured to retain the parameters returned by the LLM. This really helps in automating the call and subsequent calling logic becomes quite easy. The client code do not need to intercept the LLM response anymore and then further decide to call the tool manually. This simplifies the client code.
+
+We then print the response to the console window. As you can see the Semantic Kernel really makes it very simple to integrate with MCP tools and automate most of the complexity of calling tools as we have seen in my earlier basic demos.
+
+```csharp
+OpenAIPromptExecutionSettings executionSettings = new()
+{
+	Temperature = 0,
+	FunctionChoiceBehavior = FunctionChoiceBehavior.Auto(options: new() { RetainArgumentTypes = rue })
+};
+
+var prompt = "get me the balance for JohnDoe";
+var result = await kernel.InvokePromptAsync(prompt, new(executionSettings)).ConfigureAwaitfalse);
+Console.WriteLine($"\n\n{prompt}\n{result}");
+```
+
+### Run
+To run the demo -
+- You can first start the BankingService project, this will start the APIs on `http://localhost:7001`
+
+- Then you can start the MCP server project, this will start the MCP server on `http://localhost:5000/sse`
+- Finally you can start the MCP Semantic Kernel Client project, this will connect to the LLM and send the user query. In response to user query, it will call the Tool and again call LLM to get final response.
+
+You can see a sample output below -
+```bash
+info: Microsoft.SemanticKernel.KernelFunction[0]
+      Function (null)-InvokePromptAsync_04f2495fcfe04074aeb16a0eb2763883 invoking.
+info: Microsoft.SemanticKernel.Connectors.AzureOpenAI.AzureOpenAIChatCompletionService[0]
+      Prompt tokens: 140. Completion tokens: 20. Total tokens: 160.
+info: Microsoft.SemanticKernel.KernelFunction[0]
+      Function Banking-GetBalance invoking.
+info: Microsoft.SemanticKernel.KernelFunction[0]
+      Function Banking-GetBalance succeeded.
+info: Microsoft.SemanticKernel.KernelFunction[0]
+      Function Banking-GetBalance completed. Duration: 0.2761426s
+info: Microsoft.SemanticKernel.Connectors.AzureOpenAI.AzureOpenAIChatCompletionService[0]
+      Prompt tokens: 201. Completion tokens: 14. Total tokens: 215.
+info: Microsoft.SemanticKernel.KernelFunction[0]
+      Function (null)-InvokePromptAsync_04f2495fcfe04074aeb16a0eb2763883 succeeded.
+info: Microsoft.SemanticKernel.KernelFunction[0]
+      Function (null)-InvokePromptAsync_04f2495fcfe04074aeb16a0eb2763883 completed. Duration: 3.6370541s
+
+
+get me the balance for JohnDoe
+The balance for JohnDoe is $1500.75.
+```
+
+From the trace you can see, it actually called the "Banking-GetBalance" tool and passed the parameters to it. The tool then called the BankingService API and returned the result back to LLM. The LLM then returned the final response back to the client. This is a very simple example of how to integrate with MCP tools using Semantic Kernel and Azure OpenAI LLM.
 
 ## Conclusion
-My objective was to demonstrate the model context protocol at a very basic level without considering the complexity of LLMs and other tools. In later code samples, I will demonstrate how to integrate with LLM and AI Agents.
+My objective was to demonstrate the model context protocol and its consumption using the Semantic KErnel SDK. As you can see, both these technologies compliments each other and its quite interesting to see how the Semantic Kernel is able to extensible to integrate with modern protocols. This makes a great choice to consider for Agent development which we will see in later posts.

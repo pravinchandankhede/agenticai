@@ -21,7 +21,7 @@ This shows the usage of Microsoft Semantic Kernel framework for building the AI 
 [Code](https://github.com/pravinchandankhede/agenticai/tree/main/src/SemanticKernel)
 
 ## Banking MAS
-This is a demo of multi agent system implementation for a banking scenario. This implements a loan application scenario and how varios agents gets involved in doing credit, policy, account checks. This is a distributed multi agent system and uses Azure Service Bus Topic based communication.
+This is a demo of multi agent system implementation for a banking scenario. This implements a loan application scenario and how various agents gets involved in doing credit, policy, account checks. This is a distributed multi agent system and uses Azure Service Bus Topic based communication.
 [Code](https://github.com/pravinchandankhede/agenticai/tree/main/src/Banking-Multi-Agent-System-Demo)
 
 ## Model Context Protocol
