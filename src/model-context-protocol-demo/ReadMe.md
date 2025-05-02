@@ -6,7 +6,7 @@ This contains the outline and description of design for this demo application.
 3. [Banking MCP Server](#banking-mcp-server)
    - [MCP Server Setup](#mcp-server-setup)
    - [Tool Setup](#tool-setup)
-4. [MCP Client](#mcp-client)
+4. [Basic MCP Client](#mcp-client)
    - [MCP Client Setup](#mcp-client-setup)
    - [Tool Discovery](#tool-discovery)
    - [Tool Invocation](#tool-invocation)
@@ -110,8 +110,8 @@ Below is the implementation of the tool for `GetBalances` method under `BalanceT
 As you can see from above implementation, defining tool is mostly around wrapping up the service method and adding the `McpServerTool` attribute to it. As a good practice we should use `Description` attribute to provide a description of the tool. This will be used by the client to display the tool name and description. We will see the client implementation in the next section.
 The `BankingServiceClient` is injected into the tool method. This is done using the DI container. The MCP server will resolve the dependencies for the tool method and inject them into the method.
 
-## MCP Client
-Out MCP client is a simple console application which uses the MCP server to list down all the tools available with the MCP server. It then invokes the tools to perform operations. The client uses the `McpClient` class to connect to the MCP server and list down all the tools available with it.
+## Basic MCP Client
+MCP client is a simple console application which uses the MCP server to list down all the tools available with the MCP server. It then invokes the tools to perform operations. The client uses the `McpClient` class to connect to the MCP server and list down all the tools available with it.
 
 In real world scenario, the client can be a web application or a mobile application which can use the MCP server to perform operations. The client can be any application which can make HTTP calls to the MCP server. The MCP server will expose the tools as HTTP endpoints and the client can invoke them using the tool name.
 
@@ -276,6 +276,7 @@ Executing tool: GetBalance with parameters: System.Collections.Generic.Dictionar
 Tool result: {"name":"JohnDoe","amount":1500.75}
 Assistant: The balance for account "JohnDoe" is $1500.75.
 ```
+## Semantic Kernel based client with MCP Client Tools and Azure OpenAI LLM Integration
 
 ## Conclusion
 My objective was to demonstrate the model context protocol at a very basic level without considering the complexity of LLMs and other tools. In later code samples, I will demonstrate how to integrate with LLM and AI Agents.
