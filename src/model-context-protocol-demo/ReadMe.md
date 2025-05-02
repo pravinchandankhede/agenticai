@@ -364,7 +364,6 @@ Console.WriteLine($"\n\n{prompt}\n{result}");
 ### Run
 To run the demo -
 - You can first start the BankingService project, this will start the APIs on `http://localhost:7001`
-
 - Then you can start the MCP server project, this will start the MCP server on `http://localhost:5000/sse`
 - Finally you can start the MCP Semantic Kernel Client project, this will connect to the LLM and send the user query. In response to user query, it will call the Tool and again call LLM to get final response.
 
