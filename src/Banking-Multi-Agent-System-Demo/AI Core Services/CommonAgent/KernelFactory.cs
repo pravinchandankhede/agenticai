@@ -22,10 +22,10 @@ public class KernelFactory
             AppSetting.Endpoint,
             AppSetting.Key);
 
-        builder.AddAzureOpenAITextEmbeddingGeneration(
-                deploymentName: AppSetting.EmbeddingModelDeploymentName!,
-                endpoint: AppSetting.Endpoint!,
-                apiKey: AppSetting.Key!);
+        builder.AddOpenAIEmbeddingGenerator(
+                AppSetting.EmbeddingModelDeploymentName!,
+                AppSetting.Endpoint!,
+                AppSetting.Key!);
 
         builder.AddAzureAISearchVectorStore(
            new Uri(AppSetting.AzureSearchURL),

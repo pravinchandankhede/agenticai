@@ -1,14 +1,14 @@
 ﻿namespace BankingMAS.RAGEngine.Embedding;
 
 using BankingMAS.RAGEngine.Models;
+using Microsoft.Extensions.AI;
 using Microsoft.Extensions.VectorData;
-using Microsoft.SemanticKernel.Embeddings;
 
 #pragma warning disable SKEXP0010
 #pragma warning disable SKEXP0001
 #pragma warning disable SKEXP0020
 
-internal class EmbeddingEngine(IVectorStore vectorStore, ITextEmbeddingGenerationService textEmbeddingGenerationService)
+internal class EmbeddingEngine(VectorStore vectorStore, IEmbeddingGenerator<String, Embedding<Single>> embeddingGenerator)
 {
     /// <summary>
     /// Generate an embedding for each text Record and upload it to the specified collection.
@@ -18,14 +18,15 @@ internal class EmbeddingEngine(IVectorStore vectorStore, ITextEmbeddingGeneratio
     /// <returns>An async task.</returns>
     public async Task GenerateEmbeddingsAndStore(String collectionName, IEnumerable<DocumentRecord> documentRecords)
     {
-        var collection = vectorStore.GetCollection<String, DocumentRecord>(collectionName);
-        await collection.CreateCollectionIfNotExistsAsync();
+        VectorStoreCollection<String, DocumentRecord> collection = vectorStore.GetCollection<String, DocumentRecord>(collectionName);
+        await collection.EnsureCollectionExistsAsync();
 
-        foreach (var record in documentRecords)
+        foreach (DocumentRecord record in documentRecords)
         {
             // Generate the text embedding.
             Console.WriteLine($"Generating embedding for record: {record.RecordId}");
-            record.TextEmbedding = await textEmbeddingGenerationService.GenerateEmbeddingAsync(record.Text);
+            var embedding = await embeddingGenerator.GenerateVectorAsync(record.Text);
+            record.TextEmbedding = embedding.ToArray();
 
             // Upload the text Record.
             Console.WriteLine($"Upserting record: {record.RecordId}");
@@ -37,7 +38,7 @@ internal class EmbeddingEngine(IVectorStore vectorStore, ITextEmbeddingGeneratio
 
     public DocumentRecord GetDocumentRecord(String prompt)
     {
-        var key = Guid.NewGuid().ToString();
+        String key = Guid.NewGuid().ToString();
 
         return new DocumentRecord
         {
@@ -51,7 +52,7 @@ internal class EmbeddingEngine(IVectorStore vectorStore, ITextEmbeddingGeneratio
 
     public DocumentRecord GetDocumentRecord(KeyValuePair<String, String> entry)
     {
-        var key = Guid.NewGuid().ToString();
+        String key = Guid.NewGuid().ToString();
 
         return new DocumentRecord
         {
