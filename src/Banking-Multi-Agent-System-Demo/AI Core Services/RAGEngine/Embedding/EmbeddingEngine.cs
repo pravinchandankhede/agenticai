@@ -25,7 +25,7 @@ internal class EmbeddingEngine(VectorStore vectorStore, IEmbeddingGenerator<Stri
         {
             // Generate the text embedding.
             Console.WriteLine($"Generating embedding for record: {record.RecordId}");
-            var embedding = await embeddingGenerator.GenerateVectorAsync(record.Text);
+            ReadOnlyMemory<Single> embedding = await embeddingGenerator.GenerateVectorAsync(record.Text);
             record.TextEmbedding = embedding.ToArray();
 
             // Upload the text Record.
