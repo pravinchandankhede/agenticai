@@ -65,6 +65,5 @@
       <Name>PolicyAgent</Name>
       <Project>{3a5c1525-d653-4e56-9a88-ceea4efc043e}</Project>
     </ProjectReference>
-  </ItemGroup>
-  <Import Project="$(VSToolsPath)\ArchitectureTools\Microsoft.VisualStudio.TeamArchitect.ModelingProject.targets" Condition="'$(VSToolsPath)' != ''" />
+  </ItemGroup>  
 </Project>
