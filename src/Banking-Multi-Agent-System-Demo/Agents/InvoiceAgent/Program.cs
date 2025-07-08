@@ -121,7 +121,7 @@ internal class Program
     {
         IRAGEngine engine = new RAGEngine.Azure.AzureSearchRAGEngine();
 
-        var content = File.ReadAllText(@"C:\GitHub\agenticai\src\BankingMAS\invoice.json");
+        var content = File.ReadAllText(@"C:\GitHub\agenticai\agenticai\src\Banking-Multi-Agent-System-Demo\Data\invoice.json");
 
         await engine.GenerateEmbeddingAsync(content);
 

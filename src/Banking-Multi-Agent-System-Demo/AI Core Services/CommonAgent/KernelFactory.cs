@@ -27,7 +27,8 @@ public class KernelFactory
                 AppSetting.Endpoint!,
                 AppSetting.Key!);
 
-        builder.AddAzureAISearchVectorStore(
+        //builder.AddAzureAISearchVectorStore
+        builder.Services.AddAzureAISearchVectorStore(
            new Uri(AppSetting.AzureSearchURL),
            new AzureKeyCredential(AppSetting.AzureSearchKey));
 
