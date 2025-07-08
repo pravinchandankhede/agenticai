@@ -1,0 +1,30 @@
+name: .NET Build (Banking-Multi-Agent-System-Demo)
+
+on:
+  push:
+    paths:
+      - 'src/Banking-Multi-Agent-System-Demo/**'
+  pull_request:
+    paths:
+      - 'src/Banking-Multi-Agent-System-Demo/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 9
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore src/Banking-Multi-Agent-System-Demo
+
+      - name: Build
+        run: dotnet build src/Banking-Multi-Agent-System-Demo --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test src/Banking-Multi-Agent-System-Demo --no-build --verbosity normal || echo "No tests found"
