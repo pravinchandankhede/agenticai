@@ -17,12 +17,12 @@ public class KernelFactory
     {
         var builder = Kernel.CreateBuilder();
 
-        builder.AddAzureOpenAIChatCompletion(
+        builder.Services.AddAzureOpenAIChatCompletion(
             AppSetting.DeploymentName,
             AppSetting.Endpoint,
             AppSetting.Key);
 
-        builder.AddOpenAIEmbeddingGenerator(
+        builder.Services.AddAzureOpenAIEmbeddingGenerator(
                 AppSetting.EmbeddingModelDeploymentName!,
                 AppSetting.Endpoint!,
                 AppSetting.Key!);
