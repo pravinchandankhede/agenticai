@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgentOrchestration", "Agent
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedLibrary", "SharedLibrary\SharedLibrary.csproj", "{DD3F2416-DCEE-475F-A825-805B4B3398C2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{5D458248-A196-46CB-A0CE-CCE852E3843A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConcurrentOrchestration", "ConcurrentOrchestration\ConcurrentOrchestration.csproj", "{D4ECE87E-F48B-4FEF-8E0D-5B37E5A1D9BF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{DD3F2416-DCEE-475F-A825-805B4B3398C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD3F2416-DCEE-475F-A825-805B4B3398C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD3F2416-DCEE-475F-A825-805B4B3398C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D458248-A196-46CB-A0CE-CCE852E3843A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D458248-A196-46CB-A0CE-CCE852E3843A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D458248-A196-46CB-A0CE-CCE852E3843A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D458248-A196-46CB-A0CE-CCE852E3843A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4ECE87E-F48B-4FEF-8E0D-5B37E5A1D9BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4ECE87E-F48B-4FEF-8E0D-5B37E5A1D9BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4ECE87E-F48B-4FEF-8E0D-5B37E5A1D9BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4ECE87E-F48B-4FEF-8E0D-5B37E5A1D9BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
