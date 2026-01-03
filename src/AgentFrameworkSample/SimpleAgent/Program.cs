@@ -6,9 +6,10 @@ using Microsoft.Extensions.AI;
 using OpenAI;
 
 AIAgent agent = new AzureOpenAIClient(
-    new Uri("https://<myresource>.openai.azure.com"),
+    new Uri(SharedLibrary.AppSetting.Endpoint),
     new AzureCliCredential())
-        .GetChatClient("gpt-4o-mini")
+        .GetChatClient(SharedLibrary.AppSetting.DeploymentName)
+        .AsIChatClient()
         .CreateAIAgent(instructions: "You are good at telling jokes.", name: "Joker", description: "An agent that tells jokes.")
         ;
 
