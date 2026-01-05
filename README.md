@@ -7,6 +7,8 @@ This repository contains demo samples showcasing various agentic AI implementati
 ## Table of Contents
 
 1. [Agent Framework Sample](#agent-framework-sample)
+   - [Simple Agent](#simple-agent)
+   - [Image Agent](#image-agent)
 2. [Agent Orchestration](#agent-orchestration)
    - [Sequential Orchestration](#sequential-orchestration)
    - [Concurrent Orchestration](#concurrent-orchestration)
@@ -24,15 +26,34 @@ This repository contains demo samples showcasing various agentic AI implementati
 
 ## Agent Framework Sample
 
-Demonstrates the usage of Microsoft Agents AI framework for building simple AI agents with Azure OpenAI integration.
-
-**Key Features:**
-- Simple agent creation using `Microsoft.Agents.AI`
-- Azure OpenAI integration with authentication options (AzureKeyCredential, DefaultAzureCredential)
-- Agent instruction configuration
-- Text and image content processing
+Demonstrates the usage of Microsoft Agents AI framework for building AI agents with Azure OpenAI integration. This sample includes multiple agent implementations and a shared helper library for common agent creation patterns.
 
 **[View Code](https://github.com/pravinchandankhede/agenticai/tree/main/src/AgentFrameworkSample)**
+
+### Simple Agent
+
+Basic agent implementation demonstrating fundamental agent creation patterns with joke-telling capabilities.
+
+**Key Features:**
+- Agent creation using `Microsoft.Agents.AI` framework
+- Azure OpenAI integration with AzureKeyCredential authentication
+- Configurable agent instructions, names, and descriptions
+- Multimodal content processing (text and images via URI)
+- Simple conversational interactions
+
+**[View Code](https://github.com/pravinchandankhede/agenticai/tree/main/src/AgentFrameworkSample/SimpleAgent)**
+
+### Image Agent
+
+Specialized agent for image analysis and description using multimodal AI capabilities.
+
+**Key Features:**
+- Image understanding and description
+- Multimodal content processing with vision capabilities
+- Utilizes shared `AgentHelper` library for consistent agent creation
+- Azure OpenAI vision model integration
+
+**[View Code](https://github.com/pravinchandankhede/agenticai/tree/main/src/AgentFrameworkSample/ImageAgent)**
 
 ---
 
