@@ -1,10 +1,7 @@
-﻿using System;
-using Azure;
+﻿using Azure;
 using Azure.AI.OpenAI;
-using Azure.Identity;
 using Microsoft.Agents.AI;
 using Microsoft.Extensions.AI;
-using OpenAI;
 
 namespace Common;
 
