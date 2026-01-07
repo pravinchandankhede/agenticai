@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageAgent", "ImageAgent\Im
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{D75572DC-C543-43B5-BDD2-67CF82555042}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConversationAgent", "ConversationAgent\ConversationAgent.csproj", "{D241EA28-93A0-49DA-8C6A-DDA96A29F290}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,18 @@ Global
 		{D75572DC-C543-43B5-BDD2-67CF82555042}.Release|x64.Build.0 = Release|Any CPU
 		{D75572DC-C543-43B5-BDD2-67CF82555042}.Release|x86.ActiveCfg = Release|Any CPU
 		{D75572DC-C543-43B5-BDD2-67CF82555042}.Release|x86.Build.0 = Release|Any CPU
+		{D241EA28-93A0-49DA-8C6A-DDA96A29F290}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D241EA28-93A0-49DA-8C6A-DDA96A29F290}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D241EA28-93A0-49DA-8C6A-DDA96A29F290}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D241EA28-93A0-49DA-8C6A-DDA96A29F290}.Debug|x64.Build.0 = Debug|Any CPU
+		{D241EA28-93A0-49DA-8C6A-DDA96A29F290}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D241EA28-93A0-49DA-8C6A-DDA96A29F290}.Debug|x86.Build.0 = Debug|Any CPU
+		{D241EA28-93A0-49DA-8C6A-DDA96A29F290}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D241EA28-93A0-49DA-8C6A-DDA96A29F290}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D241EA28-93A0-49DA-8C6A-DDA96A29F290}.Release|x64.ActiveCfg = Release|Any CPU
+		{D241EA28-93A0-49DA-8C6A-DDA96A29F290}.Release|x64.Build.0 = Release|Any CPU
+		{D241EA28-93A0-49DA-8C6A-DDA96A29F290}.Release|x86.ActiveCfg = Release|Any CPU
+		{D241EA28-93A0-49DA-8C6A-DDA96A29F290}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
