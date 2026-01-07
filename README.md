@@ -9,6 +9,7 @@ This repository contains demo samples showcasing various agentic AI implementati
 1. [Agent Framework Sample](#agent-framework-sample)
    - [Simple Agent](#simple-agent)
    - [Image Agent](#image-agent)
+   - [Conversation Agent](#conversation-agent)
 2. [Agent Orchestration](#agent-orchestration)
    - [Sequential Orchestration](#sequential-orchestration)
    - [Concurrent Orchestration](#concurrent-orchestration)
@@ -54,6 +55,19 @@ Specialized agent for image analysis and description using multimodal AI capabil
 - Azure OpenAI vision model integration
 
 **[View Code](https://github.com/pravinchandankhede/agenticai/tree/main/src/AgentFrameworkSample/ImageAgent)**
+
+### Conversation Agent
+
+Demonstrates multi-turn conversation capabilities with thread management for maintaining conversation context across multiple interactions.
+
+**Key Features:**
+- Multi-turn dialogue support with conversation threads
+- Thread management using `GetNewThread()` for maintaining conversation context
+- Contextual responses based on previous conversation history
+- Utilizes shared `AgentHelper` library for agent creation
+- Support for complex, sequential interactions (e.g., recipe creation followed by modifications)
+
+**[View Code](https://github.com/pravinchandankhede/agenticai/tree/main/src/AgentFrameworkSample/ConversationAgent)**
 
 ---
 
