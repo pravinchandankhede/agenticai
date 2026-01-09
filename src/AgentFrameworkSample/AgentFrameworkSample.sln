@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConversationAgent", "Conver
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToolingAgent", "ToolingAgent\ToolingAgent.csproj", "{CA88D060-D912-40D1-B195-A35EB0296201}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToolingWithHumanInLoopAgent", "ToolingWithHumanInLoopAgent\ToolingWithHumanInLoopAgent.csproj", "{A2FEA36C-6A8F-4815-BF7D-887C94770326}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -97,6 +99,18 @@ Global
 		{CA88D060-D912-40D1-B195-A35EB0296201}.Release|x64.Build.0 = Release|Any CPU
 		{CA88D060-D912-40D1-B195-A35EB0296201}.Release|x86.ActiveCfg = Release|Any CPU
 		{CA88D060-D912-40D1-B195-A35EB0296201}.Release|x86.Build.0 = Release|Any CPU
+		{A2FEA36C-6A8F-4815-BF7D-887C94770326}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2FEA36C-6A8F-4815-BF7D-887C94770326}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2FEA36C-6A8F-4815-BF7D-887C94770326}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A2FEA36C-6A8F-4815-BF7D-887C94770326}.Debug|x64.Build.0 = Debug|Any CPU
+		{A2FEA36C-6A8F-4815-BF7D-887C94770326}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A2FEA36C-6A8F-4815-BF7D-887C94770326}.Debug|x86.Build.0 = Debug|Any CPU
+		{A2FEA36C-6A8F-4815-BF7D-887C94770326}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2FEA36C-6A8F-4815-BF7D-887C94770326}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2FEA36C-6A8F-4815-BF7D-887C94770326}.Release|x64.ActiveCfg = Release|Any CPU
+		{A2FEA36C-6A8F-4815-BF7D-887C94770326}.Release|x64.Build.0 = Release|Any CPU
+		{A2FEA36C-6A8F-4815-BF7D-887C94770326}.Release|x86.ActiveCfg = Release|Any CPU
+		{A2FEA36C-6A8F-4815-BF7D-887C94770326}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
