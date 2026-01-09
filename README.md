@@ -10,6 +10,7 @@ This repository contains demo samples showcasing various agentic AI implementati
    - [Simple Agent](#simple-agent)
    - [Image Agent](#image-agent)
    - [Conversation Agent](#conversation-agent)
+   - [Tooling Agent](#tooling-agent)
 2. [Agent Orchestration](#agent-orchestration)
    - [Sequential Orchestration](#sequential-orchestration)
    - [Concurrent Orchestration](#concurrent-orchestration)
@@ -68,6 +69,20 @@ Demonstrates multi-turn conversation capabilities with thread management for mai
 - Support for complex, sequential interactions (e.g., recipe creation followed by modifications)
 
 **[View Code](https://github.com/pravinchandankhede/agenticai/tree/main/src/AgentFrameworkSample/ConversationAgent)**
+
+### Tooling Agent
+
+Demonstrates function calling and tool integration capabilities, showing how agents can invoke custom functions to extend their capabilities beyond language generation.
+
+**Key Features:**
+- Function calling using `AIFunctionFactory` to register custom tools
+- Tool integration with agent via function descriptors
+- Custom tool implementation (WeatherTool example)
+- Component model attribute-based function descriptions for LLM understanding
+- Automatic tool invocation based on user queries
+- Utilizes shared `AgentHelper` library with tool support
+
+**[View Code](https://github.com/pravinchandankhede/agenticai/tree/main/src/AgentFrameworkSample/ToolingAgent)**
 
 ---
 
