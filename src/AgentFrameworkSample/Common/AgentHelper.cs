@@ -2,6 +2,7 @@
 
 using Azure;
 using Azure.AI.OpenAI;
+using Azure.Identity;
 using Microsoft.Agents.AI;
 using Microsoft.Extensions.AI;
 
@@ -32,8 +33,32 @@ public static class AgentHelper
         new AzureKeyCredential(SharedLibrary.AppSetting.Key))
             .GetChatClient(SharedLibrary.AppSetting.DeploymentName)
             .AsIChatClient()
-            .CreateAIAgent(instructions: instructions, name: name, description: description, tools)
-            ;
+            .CreateAIAgent(instructions: instructions, name: name, description: description, tools);
+
+        return agent;
+    }
+
+    public static AIAgent GetAgent(String name = "Joker"
+            , string description = "An agent that tells jokes."
+            , string instructions = "You are good at telling jokes."
+            , IList<AITool>? tools = null
+            , ChatOptions? chatOptions = null)
+    {
+        chatOptions ??= new ChatOptions();
+        chatOptions.Instructions = instructions;
+        chatOptions.Tools = tools;
+        AIAgent agent = new AzureOpenAIClient(
+        new Uri(SharedLibrary.AppSetting.Endpoint),
+        new AzureKeyCredential(SharedLibrary.AppSetting.Key))
+            .GetChatClient(SharedLibrary.AppSetting.DeploymentName)
+            .AsIChatClient()
+            .CreateAIAgent(new ChatClientAgentOptions
+            {
+                ChatOptions = chatOptions,
+                Name = name,                 
+                Description = description, 
+            });
+
 
         return agent;
     }
