@@ -11,6 +11,8 @@ This repository contains demo samples showcasing various agentic AI implementati
    - [Image Agent](#image-agent)
    - [Conversation Agent](#conversation-agent)
    - [Tooling Agent](#tooling-agent)
+   - [Tooling with Human-in-the-Loop Agent](#tooling-with-human-in-the-loop-agent)
+   - [Structured Response Agent](#structured-response-agent)
 2. [Agent Orchestration](#agent-orchestration)
    - [Sequential Orchestration](#sequential-orchestration)
    - [Concurrent Orchestration](#concurrent-orchestration)
@@ -83,6 +85,36 @@ Demonstrates function calling and tool integration capabilities, showing how age
 - Utilizes shared `AgentHelper` library with tool support
 
 **[View Code](https://github.com/pravinchandankhede/agenticai/tree/main/src/AgentFrameworkSample/ToolingAgent)**
+
+### Tooling with Human-in-the-Loop Agent
+
+Demonstrates function calling with human approval before executing tools, implementing a human-in-the-loop pattern for sensitive or important operations.
+
+**Key Features:**
+- Human approval workflow for function execution
+- `ApprovalRequiredAIFunction` wrapper for tool safety
+- Function approval request handling
+- Support for both `FunctionApprovalRequestContent` and `UserInputRequestContent`
+- Interactive approval prompts with user confirmation
+- Safe fallback handling when no approval is requested
+- Reflection-based approval response creation for flexibility
+
+**[View Code](https://github.com/pravinchandankhede/agenticai/tree/main/src/AgentFrameworkSample/ToolingWithHumanInLoopAgent)**
+
+### Structured Response Agent
+
+Demonstrates generating structured JSON responses from agents using JSON schema validation and deserialization.
+
+**Key Features:**
+- JSON schema generation using `AIJsonUtilities.CreateJsonSchema()`
+- Structured output with `ChatResponseFormat.ForJsonSchema()`
+- Schema-based response validation
+- Type-safe deserialization of agent responses
+- Support for complex types (Employee model with Name, Age, Position, Level)
+- Robust JSON extraction from multiple content formats (JsonElement, JsonDocument, string)
+- Error handling for malformed JSON responses
+
+**[View Code](https://github.com/pravinchandankhede/agenticai/tree/main/src/AgentFrameworkSample/StructuredResponseAgent)**
 
 ---
 
