@@ -21,7 +21,8 @@ This repository contains demo samples showcasing various agentic AI implementati
 3. [Semantic Kernel](#semantic-kernel)
 4. [Banking Multi-Agent System (MAS)](#banking-multi-agent-system-mas)
 5. [Customer Service Agent](#customer-service-agent)
-6. [Model Context Protocol (MCP)](#model-context-protocol-mcp)
+6. [GitHub Copilot SDK](#github-copilot-sdk)
+7. [Model Context Protocol (MCP)](#model-context-protocol-mcp)
    - [Basic Protocol Working Sample](#basic-protocol-working-sample)
    - [Azure OpenAI Chat Completion Integration](#azure-openai-chat-completion-integration)
    - [Semantic Kernel Plugin Integration](#semantic-kernel-plugin-integration)
@@ -198,6 +199,26 @@ Demonstrates a banking customer service agent implementation using Semantic Kern
 - Knowledge retrieval services
 
 **[View Code](https://github.com/pravinchandankhede/agenticai/tree/main/src/CustomerService)**
+
+---
+
+## GitHub Copilot SDK
+
+Demonstrates the usage of the GitHub Copilot SDK for building AI agents using the official GitHub Copilot SDK package. This sample shows how to create a simple agent that interacts with GitHub Copilot's language models.
+
+**Key Features:**
+- GitHub Copilot SDK integration using `GitHub.Copilot.SDK` NuGet package
+- Simple agent creation with `CopilotClient`
+- Session-based conversation management
+- Event-driven message handling
+- Support for GPT-4.1 and other models
+- Asynchronous message processing
+
+**Technology Stack:**
+- .NET 10.0
+- GitHub.Copilot.SDK (v0.1.18)
+
+**[View Code](https://github.com/pravinchandankhede/agenticai/tree/main/src/GitHubCopilot)**
 
 ---
 
