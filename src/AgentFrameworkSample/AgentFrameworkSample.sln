@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToolingWithHumanInLoopAgent
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StructuredResponseAgent", "StructuredResponseAgent\StructuredResponseAgent.csproj", "{35215DE4-6FC1-4A44-B403-E15A5A2B30CE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgentAsToolSample", "AgentAsToolSample\AgentAsToolSample.csproj", "{4495C097-F69D-4C21-9B28-BEFB98D5427C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -125,6 +127,18 @@ Global
 		{35215DE4-6FC1-4A44-B403-E15A5A2B30CE}.Release|x64.Build.0 = Release|Any CPU
 		{35215DE4-6FC1-4A44-B403-E15A5A2B30CE}.Release|x86.ActiveCfg = Release|Any CPU
 		{35215DE4-6FC1-4A44-B403-E15A5A2B30CE}.Release|x86.Build.0 = Release|Any CPU
+		{4495C097-F69D-4C21-9B28-BEFB98D5427C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4495C097-F69D-4C21-9B28-BEFB98D5427C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4495C097-F69D-4C21-9B28-BEFB98D5427C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{4495C097-F69D-4C21-9B28-BEFB98D5427C}.Debug|x64.Build.0 = Debug|Any CPU
+		{4495C097-F69D-4C21-9B28-BEFB98D5427C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4495C097-F69D-4C21-9B28-BEFB98D5427C}.Debug|x86.Build.0 = Debug|Any CPU
+		{4495C097-F69D-4C21-9B28-BEFB98D5427C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4495C097-F69D-4C21-9B28-BEFB98D5427C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4495C097-F69D-4C21-9B28-BEFB98D5427C}.Release|x64.ActiveCfg = Release|Any CPU
+		{4495C097-F69D-4C21-9B28-BEFB98D5427C}.Release|x64.Build.0 = Release|Any CPU
+		{4495C097-F69D-4C21-9B28-BEFB98D5427C}.Release|x86.ActiveCfg = Release|Any CPU
+		{4495C097-F69D-4C21-9B28-BEFB98D5427C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
