@@ -12,6 +12,7 @@ This repository contains demo samples showcasing various agentic AI implementati
    - [Conversation Agent](#conversation-agent)
    - [Tooling Agent](#tooling-agent)
    - [Tooling with Human-in-the-Loop Agent](#tooling-with-human-in-the-loop-agent)
+   - [Agent as Tool Sample](#agent-as-tool-sample)
    - [Structured Response Agent](#structured-response-agent)
 2. [Agent Orchestration](#agent-orchestration)
    - [Sequential Orchestration](#sequential-orchestration)
@@ -101,6 +102,21 @@ Demonstrates function calling with human approval before executing tools, implem
 - Reflection-based approval response creation for flexibility
 
 **[View Code](https://github.com/pravinchandankhede/agenticai/tree/main/src/AgentFrameworkSample/ToolingWithHumanInLoopAgent)**
+
+### Agent as Tool Sample
+
+Demonstrates how to use an agent as a tool for another agent, creating agent composition and delegation patterns. This sample shows how one agent can invoke another agent as a function/tool to extend its capabilities.
+
+**Key Features:**
+- Agent composition using `AsAIFunction()` extension method
+- Agent delegation patterns where one agent calls another
+- Nested agent invocation and result processing
+- Tool integration with agents as callable functions
+- Example: Main agent with a specialized agent as a tool that responds in Hindi
+- Utilizes shared `AgentHelper` library for consistent agent creation
+- Demonstrates language-specific agent delegation
+
+**[View Code](https://github.com/pravinchandankhede/agenticai/tree/main/src/AgentFrameworkSample/AgentAsToolSample)**
 
 ### Structured Response Agent
 
