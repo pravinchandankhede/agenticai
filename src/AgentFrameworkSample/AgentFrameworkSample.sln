@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StructuredResponseAgent", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgentAsToolSample", "AgentAsToolSample\AgentAsToolSample.csproj", "{4495C097-F69D-4C21-9B28-BEFB98D5427C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObservabilityEnabledAgent", "ObservabilityEnabledAgent\ObservabilityEnabledAgent.csproj", "{AC0E8673-341C-4259-99B6-A2002215952A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -139,6 +141,18 @@ Global
 		{4495C097-F69D-4C21-9B28-BEFB98D5427C}.Release|x64.Build.0 = Release|Any CPU
 		{4495C097-F69D-4C21-9B28-BEFB98D5427C}.Release|x86.ActiveCfg = Release|Any CPU
 		{4495C097-F69D-4C21-9B28-BEFB98D5427C}.Release|x86.Build.0 = Release|Any CPU
+		{AC0E8673-341C-4259-99B6-A2002215952A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC0E8673-341C-4259-99B6-A2002215952A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC0E8673-341C-4259-99B6-A2002215952A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{AC0E8673-341C-4259-99B6-A2002215952A}.Debug|x64.Build.0 = Debug|Any CPU
+		{AC0E8673-341C-4259-99B6-A2002215952A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AC0E8673-341C-4259-99B6-A2002215952A}.Debug|x86.Build.0 = Debug|Any CPU
+		{AC0E8673-341C-4259-99B6-A2002215952A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC0E8673-341C-4259-99B6-A2002215952A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC0E8673-341C-4259-99B6-A2002215952A}.Release|x64.ActiveCfg = Release|Any CPU
+		{AC0E8673-341C-4259-99B6-A2002215952A}.Release|x64.Build.0 = Release|Any CPU
+		{AC0E8673-341C-4259-99B6-A2002215952A}.Release|x86.ActiveCfg = Release|Any CPU
+		{AC0E8673-341C-4259-99B6-A2002215952A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
