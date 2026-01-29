@@ -14,6 +14,7 @@ This repository contains demo samples showcasing various agentic AI implementati
    - [Tooling Agent](#tooling-agent)
    - [Tooling with Human-in-the-Loop Agent](#tooling-with-human-in-the-loop-agent)
    - [Agent as Tool Sample](#agent-as-tool-sample)
+   - [Observability Enabled Agent](#observability-enabled-agent)
    - [Structured Response Agent](#structured-response-agent)
 2. [Agent Orchestration](#agent-orchestration)
    - [Sequential Orchestration](#sequential-orchestration)
@@ -118,6 +119,27 @@ Demonstrates how to use an agent as a tool for another agent, creating agent com
 - Demonstrates language-specific agent delegation
 
 **[View Code](https://github.com/pravinchandankhede/agenticai/tree/main/src/AgentFrameworkSample/AgentAsToolSample)**
+
+### Observability Enabled Agent
+
+Demonstrates how to enable observability and telemetry in agents using OpenTelemetry for monitoring, tracing, and debugging agent behavior.
+
+**Key Features:**
+- OpenTelemetry integration for agent monitoring
+- Console-based trace exporter for real-time observability
+- TracerProvider configuration with custom source names
+- Agent builder pattern with `UseOpenTelemetry()` middleware
+- Detailed logs and metrics for agent actions
+- Tracing of agent execution flow and performance
+- Support for distributed tracing in multi-agent scenarios
+- Production-ready observability patterns
+
+**Technology Stack:**
+- OpenTelemetry (v1.15.0)
+- OpenTelemetry.Exporter.Console (v1.15.0)
+- Microsoft.Agents.AI framework
+
+**[View Code](https://github.com/pravinchandankhede/agenticai/tree/main/src/AgentFrameworkSample/ObservabilityEnabledAgent)**
 
 ### Structured Response Agent
 
