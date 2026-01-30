@@ -1,31 +1,39 @@
-﻿using GitHub.Copilot.SDK;
+﻿namespace GitHubCopilot.SimpleAgent;
 
-namespace GitHubCopilot.SimpleAgent;
+using GitHub.Copilot.SDK;
 
 internal class Program
 {
-    private static async Task Main(string[] args)
+    private static async Task Main()
     {
-        await using var client = new CopilotClient();
-        await client.StartAsync();
-        await using var session = await client.CreateSessionAsync(new SessionConfig { Model = "gpt-4.1" });
-
-        var done = new TaskCompletionSource();
-
-        session.On(evt =>
+        try
         {
-            if (evt is AssistantMessageEvent msg)
+            await using var client = new CopilotClient();
+            await client.StartAsync();
+            await using var session = await client.CreateSessionAsync(new SessionConfig { Model = "gpt-4.1" });
+
+            var done = new TaskCompletionSource();
+
+            session.On(evt =>
             {
-                Console.WriteLine(msg.Data.Content);
-            }
-            else if (evt is SessionIdleEvent)
-            {
-                done.SetResult();
-            }
-        });
-        // Send a message and wait for completion
-        await session.SendAsync(new MessageOptions { Prompt = "What is 2+2?" });
-        await done.Task;
-        
+                if (evt is AssistantMessageEvent msg)
+                {
+                    Console.WriteLine(msg.Data.Content);
+                }
+                else if (evt is SessionIdleEvent)
+                {
+                    done.SetResult();
+                }
+            });
+            // Send a message and wait for completion
+            await session.SendAsync(new MessageOptions { Prompt = "What is 2+2?" });
+            await done.Task;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+        }
+        Console.ReadLine();
+
     }
 }
