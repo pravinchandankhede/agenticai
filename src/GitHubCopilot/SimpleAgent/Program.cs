@@ -26,14 +26,15 @@ internal class Program
                 }
             });
             // Send a message and wait for completion
-            await session.SendAsync(new MessageOptions { Prompt = "What is 2+2?" });
+            var response = await session.SendAndWaitAsync(new MessageOptions { Prompt = "What is 2+2?" });
             await done.Task;
+
+            //Console.WriteLine("Response:" + response?.Data.Content);
         }
         catch (Exception ex)
         {
             Console.WriteLine($"Error: {ex.Message}");
         }
         Console.ReadLine();
-
     }
 }
