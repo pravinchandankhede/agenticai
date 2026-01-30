@@ -25,6 +25,9 @@ This repository contains demo samples showcasing various agentic AI implementati
 4. [Banking Multi-Agent System (MAS)](#banking-multi-agent-system-mas)
 5. [Customer Service Agent](#customer-service-agent)
 6. [GitHub Copilot SDK](#github-copilot-sdk)
+   - [GitHub Copilot CLI — installation & setup](#github-copilot-cli---installation--setup)
+   - [Quick Start — Copilot CLI usage examples](#quick-start---copilot-cli-usage-examples)
+   - [SDK sample (C#)](#sdk-sample-c)
 7. [Model Context Protocol (MCP)](#model-context-protocol-mcp)
    - [Basic Protocol Working Sample](#basic-protocol-working-sample)
    - [Azure OpenAI Chat Completion Integration](#azure-openai-chat-completion-integration)
@@ -242,6 +245,63 @@ Demonstrates a banking customer service agent implementation using Semantic Kern
 ---
 
 ## GitHub Copilot SDK
+
+### GitHub Copilot CLI — installation & setup
+
+Install and authenticate the GitHub Copilot CLI to experiment with Copilot from the terminal. For the latest installation instructions and releases see the official repo: `https://github.com/github/copilot-cli`.
+
+Common installation options:
+- Prerequisite: install GitHub CLI (`gh`) — https://cli.github.com/
+- Install via `gh` extension (recommended when available):
+  - `gh extension install github/copilot-cli`
+- macOS (Homebrew):
+  - `brew install --cask github/copilot-cli`
+- Windows (winget):
+  - `winget install --id GitHub.Copilot.CLI`
+
+After installing, authenticate your CLI:
+- `copilot auth login` (opens browser to complete GitHub authentication)
+
+Quick validation:
+- `copilot --version`
+- `copilot --help`
+
+Note: exact package names or commands may change; consult the official repo linked above when in doubt.
+
+**Quick Start — Copilot CLI usage examples**
+
+Start an interactive chat session:
+```
+copilot chat
+```
+
+Ask for a short explanation or code transformation directly:
+```
+copilot chat "Explain the following C# code: var x = items.Where(i => i.IsActive);
+```
+
+Generate a code snippet or refactor using a one-shot command:
+```
+copilot complete --language csharp --prompt "Create a method to validate email addresses"
+```
+
+**SDK sample (C#)**
+
+The `src/GitHubCopilot` sample demonstrates using the `GitHub.Copilot.SDK` NuGet package. A minimal usage pattern:
+
+```csharp
+// Create and configure Copilot client (pseudocode - see sample project for full example)
+using var client = new CopilotClient(new CopilotClientOptions { /* credentials/config */ });
+
+var session = await client.CreateSessionAsync();
+await session.SendMessageAsync("Hello, Copilot!");
+var response = await session.ReceiveMessageAsync();
+Console.WriteLine(response.Text);
+```
+
+See the full sample and project configuration in `src/GitHubCopilot` for complete code and setup details.
+
+### Simple Agent
 
 Demonstrates the usage of the GitHub Copilot SDK for building AI agents using the official GitHub Copilot SDK package. This sample shows how to create a simple agent that interacts with GitHub Copilot's language models.
 
